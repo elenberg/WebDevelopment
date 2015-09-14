@@ -1,3 +1,10 @@
 #menu {
   display: inline;
 }
+li {
+  float: left;
+}
+a {
+  display: block;
+  width: 40 px;
+}
