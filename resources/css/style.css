@@ -1,0 +1,11 @@
+/*
+    This is the CSS style document.
+
+    This file contains generic CSS styling that will be replicated through the website
+ */
+
+h1.mainHeader
+{
+  text-align: center;
+  color: grey;
+}
