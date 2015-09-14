@@ -1,0 +1,27 @@
+#menu {
+  text-align: center;
+}
+#menu ul {
+  display: inline-block;
+  list-style-type: none;
+  margin: 0;
+  padding: 2px;
+  overflow: hidden;
+  }
+#menu li {
+  float: left;
+}
+#menu a:link, a:visited {
+  display: inline-block;
+  width: 140px;
+  font-weight: bolder;
+  text-align: center;
+  color: white;
+  background-color: grey;
+  padding: 8px;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+#menu a:hover, a:active{
+  background-color: black;
+}
