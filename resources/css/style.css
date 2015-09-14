@@ -7,7 +7,7 @@ ul {
 li {
   float: left;
 }
-a {
+a:link, a:visited {
   display: block;
   width: 140 px;
   font-weight: bolder;
