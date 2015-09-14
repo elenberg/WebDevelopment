@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
     This is the CSS style document.
 
@@ -8,4 +9,24 @@ h1.mainHeader
 {
   text-align: center;
   color: grey;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  }
+  
+li {
+  float: left;
+}
+
+a:link, a:visited {
+  display: block;
+  width: 140 px;
+  font-weight: bolder;
+  background-color: green;
+  padding: 8 px;
+  text-transform: capitalize;
 }
