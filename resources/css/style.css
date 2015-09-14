@@ -9,5 +9,9 @@ li {
 }
 a {
   display: block;
-  width: 40 px;
+  width: 140 px;
+  font-weight: bolder;
+  background-color: green;
+  padding: 8 px;
+  text-transform: capitalize;
 }
