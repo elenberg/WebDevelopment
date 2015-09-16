@@ -12,16 +12,35 @@
   float: left;
 }
 #menu a:link, a:visited {
+  border-radius: 20px;
   display: inline-block;
   width: 140px;
   font-weight: bolder;
   text-align: center;
   color: white;
-  background-color: grey;
   padding: 8px;
   text-decoration: none;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 #menu a:hover, a:active{
   background-color: black;
+}
+
+div#header {
+  poition: fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  padding:0px;
+  margin 0;
+  background: linear-gradient(grey, black);}
+body{
+  margin: 0;
+  background: #F0F0F0;
+}
+.content {
+    background: #F0F0F0;
+    height:2000px;
+    width: 960px;
+    margin: 0px auto;
 }
