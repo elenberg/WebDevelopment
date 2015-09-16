@@ -41,7 +41,7 @@ div#header {
   width:100%;
   padding:0px;
   margin 0;
-  background: linear-gradient(black, grey);
+  background: linear-gradient(silver, grey);
   box-shadow: 2px 3px 5px rgba(100, 100, 100, 0.75  );
 }
 #grid {
@@ -138,6 +138,7 @@ div#header {
   box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
 }
 #gridimages{
+  animation: fadein 2s;
   position:relative;
   top:10%;
   border-radius: 20px;
@@ -152,4 +153,8 @@ div#header {
 body{
   margin: 0;
   background: #F0F0F0;
+}
+@keyframes fadein{
+  from {opacity:0; }
+  to {opacity:1;}
 }
