@@ -1,5 +1,5 @@
 #menu {
-  text-align: center;
+  text-align: right;
 }
 #menu ul {
   display: inline-block;
@@ -12,7 +12,7 @@
   float: left;
 }
 #menu a:link, a:visited {
-  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
 	font-size: 23px;
 	font-style: normal;
 	font-variant: small-caps;
@@ -22,14 +22,18 @@
   display: inline-block;
   width: 140px;
   text-align: center;
-  color: white;
+  color: #e2e2e2;
   padding: 8px;
   text-decoration: none;
 }
+
 #menu a:hover, a:active{
   background-color: black;
 }
-
+#space {
+  height: 20px;
+  width:100%;
+}
 div#header {
   poition: fixed;
   top:0px;
@@ -38,15 +42,48 @@ div#header {
   padding:0px;
   margin 0;
   background: linear-gradient(grey, black);
-  box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);
+  box-shadow: 2px 3px 5px rgba(100, 100, 100, 0.49);
+}
+#grid {
+  background: linear-gradient(#e2e2e2,white);
+  width: 960px;
+  height: 95%;
+  margin: auto;
+  position:center;
+  border-radius: 20px;
+  border-top:20px;
+  padding: 20px 20px 20px 20px;
+  box-shadow: 2px 3px 5px rgba(100,100,100,0.5)
+}
+#g1-0-0 {
+  background:#e3e3e3;
+  width: 33%;
+  height: 240px;
+  margin:auto;
+  float:left;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
+}
+
+#g0-1-0 {
+  background:#e3e3e3;
+  width: 33%;
+  height: 240px;
+  margin:auto;
+  float:none;
+  border-radius: 20px;
+  box-shadow: 0px 3px 5px rgba(100,100,100,0.5)
+}
+#g0-0-1 {
+  background:#e3e3e3;
+  width: 33%;
+  height: 240px;
+  margin:auto;
+  float: right;
+  border-radius: 20px;
+  box-shadow: 0px 3px 5px rgba(100,100,100,0.5)
 }
 body{
   margin: 0;
   background: #F0F0F0;
-}
-.content {
-    background: #F0F0F0;
-    height:2000px;
-    width: 960px;
-    margin: 0px auto;
 }
