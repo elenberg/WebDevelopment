@@ -6,10 +6,32 @@
   position:fixed;
   float:left;
 }
-.getInfo {
-  position:relative;
-  top:10%;
-  border-radius: 20px;
-  margin:auto;
-  display:block;
+.form-wrap {
+	width: 480px;
+	height: 260px;
+	transform:translate(-50%,-50%);
+	position:relative;
+	top:50%;
+	left:50%;
+}
+.right-wrap{
+	width:230px;
+	height:100px;
+	float:right;
+	transform:translateY(-50%);
+	position:relative;
+	top:50%;
+}
+.left-wrap{
+	width:230px;
+	height:262px;
+	float:left;
+}
+.left-float{
+	width:20px;
+	height:20px;
+	float:left;
+	transform:translateY(-50%);
+	position:relative;
+	top:50%;
 }
