@@ -7,7 +7,7 @@
 }
 .form-wrap {
 	width: 550px;
-	height: 390px;
+	height: 360px;
 	transform:translate(-50%,-60%);
 	position:relative;
 	top:50%;
@@ -86,8 +86,8 @@
 	text-decoration: none;
 }
 .button:active {
-	position: relative;
-	<-top: 1px;
+	position: fixed;
+	top: 1px;
 }
 .orange {
 	color: #fef4e9;
