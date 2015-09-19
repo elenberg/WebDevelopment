@@ -56,8 +56,8 @@
 }
 .banner-pos{
 	position:fixed;
-	max-width: 100%;
-	height: auto;
+	max-width: auto;
+	height: 100%;
 }
 .button-pos{
 	transform:translateY(100%);
