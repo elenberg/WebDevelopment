@@ -1,37 +1,49 @@
 .textBox {
-	border:2px solid #000000;
-	border-radius:10px;
+	<--border:1.5px solid #000000;
+	border-radius:50px;
 	height: 24px;
 	width: 230px;
   position:fixed;
   float:left;
 }
 .form-wrap {
-	width: 480px;
-	height: 260px;
+	width: 550px;
+	height: 300px;
 	transform:translate(-50%,-50%);
 	position:relative;
 	top:50%;
 	left:50%;
+	border-radius: 20px;
+	background-color: rgba(250, 250, 250, 0.9);
 }
-.right-wrap{
+.right-float{
 	width:230px;
 	height:100px;
 	float:right;
+	margin-right: 20px;
 	transform:translateY(-50%);
 	position:relative;
 	top:50%;
 }
-.left-wrap{
+.left-float{
 	width:230px;
 	height:262px;
 	float:left;
-}
-.left-float{
-	width:20px;
-	height:20px;
-	float:left;
+	margin-left: 20px;
 	transform:translateY(-50%);
 	position:relative;
 	top:50%;
+}
+.center-float{
+	width:15px;
+	height:15px;
+	transform:translate(-50%,-50%);
+	position:absolute;
+	top:50%;
+	left:50%;
+}
+.bannerFade{
+	position:fixed;
+	max-width: 100%;
+	height: auto;
 }
