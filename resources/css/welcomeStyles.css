@@ -1,4 +1,10 @@
 .form-wrap {
+	font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+	font-size: 18px;
+	font-style: normal;
+	font-variant: small-caps;
+	font-weight: 400;
+	line-height: 18px;
 	width: 550px;
 	height: 360px;
 	transform:translate(-50%,-60%);
@@ -12,6 +18,7 @@
 	background-color: rgba(250, 250, 250, 0.92);
 }
 .textBox {
+	font-size: 16px;
 	border-radius:50px;
 	height: 24px;
 	width: 230px;
@@ -37,8 +44,11 @@
 	margin-left: 20px;
 }
 .center-divider{
-	width:15px;
-	height:15px;
+	font-size: 26px;
+	line-height: 26px;
+	width: 26px;
+	height:26px;
+	font-weight: 370;
 	transform:translate(-50%,-50%);
 	position:absolute;
 	top:50%;
@@ -67,6 +77,7 @@
 	right:7%;
 }
 .button {
+	position:fixed;
 	display:inline-block;
 	outline: none;
 	cursor: pointer;
@@ -86,7 +97,7 @@
 	text-decoration: none;
 }
 .button:active {
-	position: fixed;
+	position: inherit;
 	top: 1px;
 }
 .orange {
