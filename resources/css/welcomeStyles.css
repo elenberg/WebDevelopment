@@ -1,10 +1,10 @@
 .form-wrap {
 	font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
 	font-size: 18px;
+	line-height: 16px;
 	font-style: normal;
 	font-variant: small-caps;
 	font-weight: 400;
-	line-height: 18px;
 	width: 550px;
 	height: 360px;
 	transform:translate(-50%,-60%);
@@ -28,7 +28,7 @@
 .right-login-float{
 	width:230px;
 	height: 98px;
-	transform:translateY(-50%);
+	transform:translateY(-45%);
 	position:relative;
 	top:50%;
 	float:right;
@@ -37,7 +37,7 @@
 .left-signup-float{
 	width:230px;
 	height:262px;
-	transform:translateY(-50%);
+	transform:translateY(-45%);
 	position:relative;
 	top:50%;
 	float:left;
@@ -50,7 +50,7 @@
 	height:26px;
 	font-weight: 370;
 	transform:translate(-50%,-50%);
-	position:absolute;
+	position:fixed;
 	top:50%;
 	left:50%;
 }
@@ -68,12 +68,10 @@
 }
 .button-left {
 	transform: translateX(-50%);
-	position: fixed;
 	left:24%;
 }
 .button-right {
 	transform: translateX(-50%);
-	position: fixed;
 	right:7%;
 }
 .button {
