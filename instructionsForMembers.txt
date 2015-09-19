@@ -1,0 +1,31 @@
+<!-- Sean -->
+<li><a href="pages/welcome.html">Welcome</a></li>
+  <!--
+      - Basic info
+      - Login
+      - Signup (expanding)
+  -->
+
+<!-- Kenny -->
+<li><a href="pages/search.html">Search</a></li>
+<!--
+    - Advanced search options
+    - Saved searches (pin them)
+    - Search display area
+-->
+
+<!-- Everett -->
+<li><a href="pages/dashboard.html">Dashboard</a></li>
+<!--
+    - 9 most recent photos
+    - 9 most favorited photos
+    - 9 most commented photos
+-->
+
+<!-- Mandi -->
+<li><a href="pages/my_profile.html">Profile</a></li>
+<!--
+    - Profile info
+    - Ability to edit profile
+    - Photos?
+-->
