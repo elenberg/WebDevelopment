@@ -27,8 +27,8 @@
 }
 .right-login-float{
 	width:230px;
-	height: 98px;
-	transform:translateY(-45%);
+	height: 150px;
+	transform:translateY(-32%);
 	position:relative;
 	top:50%;
 	float:right;
@@ -36,8 +36,8 @@
 }
 .left-signup-float{
 	width:230px;
-	height:262px;
-	transform:translateY(-45%);
+	height:290px;
+	transform:translateY(-41%);
 	position:relative;
 	top:50%;
 	float:left;
@@ -60,15 +60,15 @@
 	height: 100%;
 }
 .button-pos{
-	transform:translateY(100%);
-	position:fixed;
-	top:80%;
-	width:550px;
+	transform:translate(53%, 140%);
+	position:relative;
+	width: 108px;
 	height:33px;
+	float: none;
 }
 .button-left {
 	transform: translateX(-50%);
-	left:24%;
+	left:50%;
 }
 .button-right {
 	transform: translateX(-50%);
