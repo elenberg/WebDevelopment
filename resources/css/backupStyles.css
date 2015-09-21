@@ -1,0 +1,85 @@
+
+## Cannot wait for JS so we can do this properly
+LEGACY:
+#g1-0-0 {
+  background:#e3e3e3;
+  width: 32%;
+  height:240px;
+  margin:auto;
+  float:left;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
+}
+#g0-1-0 {
+  background:#e3e3e3;
+  width: 32%;
+  height: 240px;
+  margin:auto;
+  float:right;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
+}
+#g0-0-1 {
+  background:#e3e3e3;
+  width: 32%;
+  height: 240px;
+  margin:auto;
+  border-radius:20px;
+  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
+}
+#g2-0-0 {
+  background:#e3e3e3;
+  width: 32%;
+  height:240px;
+  margin:auto;
+  float:left;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
+}
+
+#g0-2-0 {
+  background:#e3e3e3;
+  width: 32%;
+  height: 240px;
+  margin:auto;
+  float:right;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
+}
+#g0-0-2 {
+  background:#e3e3e3;
+  width: 32%;
+  height: 240px;
+  maxheight:0px;
+  margin:auto;
+  border-radius:20px;
+  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
+}
+#g3-0-0 {
+  background:#e3e3e3;
+  width: 32%;
+  height:240px;
+  margin:auto;
+  float:left;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
+}
+
+#g0-3-0 {
+  background:#e3e3e3;
+  width: 32%;
+  height: 240px;
+  margin:auto;
+  float:right;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
+}
+#g0-0-3 {
+  background:#e3e3e3;
+  width: 32%;
+  height: 240px;
+  maxheight:0px;
+  margin:auto;
+  border-radius:20px;
+  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
+}

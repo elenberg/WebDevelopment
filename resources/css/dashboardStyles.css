@@ -1,158 +1,70 @@
 #grid {
   background: linear-gradient(#e2e2e2,white);
-  width: 960px;
-  height: 780px;
+  width:980px;
+  height: 850px;
   margin: auto;
   border-radius: 20px;
   border-top:20px;
   box-shadow: 3px 3px 5px rgba(100,100,100,0.5);
   transform: translate(-50%, -50%);
-  top:60%;
+  top:50%;
   left: 50%;
   position:fixed;
 }
-.grid-elements{
-  width:inherit;
-  height:inherit;
-  transform:translate(-50%,-49%);
+.grid-wrap{
+  transform:translate(-50%, -50%);
   top:50%;
   left:50%;
   position:relative;
-  display: flex;
-  align-items:center;
+  display:block;
+  align-items: center;
+}
+.grid-elements{
+  width:96%;
+  height:33%;
+  display:flex;
+  align-items: center;
+  align-self: center;
+  transform:translateX(2%);
+  left:50%;
 }
 .grid-image-1{
   background:#e3e3e3;
-  margin: 9px;
-  width: 33%;
-  height:230px;
+  margin: auto;
+  width:auto;
+  height:85%;
   padding: 0px 10px 10px 10px;
   border-radius: 20px;
   box-shadow: 3px 3px 5px rgba(100,100,100,0.5);
-  transform:translateY(55%);
-  position: relative;
-  top:-50%;
 }
 .grid-image-2{
   background:#e3e3e3;
-  margin: 9px;
-  width: 33%;
-  height:230px;
+  margin: auto;
+  width:auto;
+  height:85%;
   padding: 0px 10px 10px 10px;
   border-radius: 20px;
   box-shadow: 3px 3px 5px rgba(100,100,100,0.5);
-  transform:translate(2%, 52%);
-  position: relative;
-  top:-17%;
-  left:-100%;
 }
 .grid-image-3{
   background:#e3e3e3;
-  margin: 9px;
-  width: 33%;
-  height:230px;
+  margin: auto;
+  width: auto;
+  height:85%;
   padding: 0px 10px 10px 10px;
   border-radius: 20px;
   box-shadow: 3px 3px 5px rgba(100,100,100,0.5);
-  transform:translate(-316%, 44%);
-  position: relative;
-  top: 17.6%;
-  left: -100%;
-}
-
-## Cannot wait for JS so we can do this properly
-LEGACY:
-#g1-0-0 {
-  background:#e3e3e3;
-  width: 32%;
-  height:240px;
-  margin:auto;
-  float:left;
-  border-radius: 20px;
-  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
-}
-#g0-1-0 {
-  background:#e3e3e3;
-  width: 32%;
-  height: 240px;
-  margin:auto;
-  float:right;
-  border-radius: 20px;
-  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
-}
-#g0-0-1 {
-  background:#e3e3e3;
-  width: 32%;
-  height: 240px;
-  margin:auto;
-  border-radius:20px;
-  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
-}
-#g2-0-0 {
-  background:#e3e3e3;
-  width: 32%;
-  height:240px;
-  margin:auto;
-  float:left;
-  border-radius: 20px;
-  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
-}
-
-#g0-2-0 {
-  background:#e3e3e3;
-  width: 32%;
-  height: 240px;
-  margin:auto;
-  float:right;
-  border-radius: 20px;
-  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
-}
-#g0-0-2 {
-  background:#e3e3e3;
-  width: 32%;
-  height: 240px;
-  maxheight:0px;
-  margin:auto;
-  border-radius:20px;
-  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
-}
-#g3-0-0 {
-  background:#e3e3e3;
-  width: 32%;
-  height:240px;
-  margin:auto;
-  float:left;
-  border-radius: 20px;
-  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
-}
-
-#g0-3-0 {
-  background:#e3e3e3;
-  width: 32%;
-  height: 240px;
-  margin:auto;
-  float:right;
-  border-radius: 20px;
-  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
-}
-#g0-0-3 {
-  background:#e3e3e3;
-  width: 32%;
-  height: 240px;
-  maxheight:0px;
-  margin:auto;
-  border-radius:20px;
-  box-shadow: 3px 3px 5px rgba(100,100,100,0.5)
 }
 #gridimages{
   position:relative;
   top:10%;
   border-radius: 20px;
   margin:auto;
-  display:block;
+  padding-top: 10px;
+  bottom:20%;
 }
 #statement {
   line-height: 40px;
-  text-align: center;
-  bottom: 20%;
+  text-align:center;
+  bottom: 10%;
 }
