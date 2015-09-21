@@ -11,6 +11,7 @@
   padding-top: 50px;
   font-size: 24px;
   font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-variant: small-caps;
 }
 
 .picture {
@@ -23,12 +24,17 @@
 .mb-wrapper form {
   font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
   font-size: 12px;
-  background-color: red;
+  background-color: inherit;
 }
 
 .mb-wrapper form input {
   font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
   font-size: 18px;
+  box-shadow: 5px 5px 5px black;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  margin-bottom: 10px;
+  font-variant: small-caps;
 }
 
 .form {
