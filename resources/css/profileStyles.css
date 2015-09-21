@@ -25,19 +25,34 @@
   font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
   font-size: 12px;
   background-color: inherit;
+  padding: 10px;
 }
 
-.mb-wrapper form input {
+.mb-wrapper .form input {
   font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
   font-size: 18px;
   box-shadow: 5px 5px 5px black;
-  padding-bottom: 5px;
-  padding-top: 5px;
-  margin-bottom: 10px;
   font-variant: small-caps;
 }
 
 .form {
-  padding-top: 50px;
+  padding: 50px;
+}
+.mb-wrapper .form div {
+  padding: 10px;
+}
 
+#BioBox {
+  height: 100px;
+}
+
+#SaveButton {
+  border-radius: 10px;
+  float: left;
+}
+
+#SaveDiv {
+  width: 230px;
+  margin-left: auto;
+  margin-right: auto;
 }
