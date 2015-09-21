@@ -7,11 +7,7 @@
   border-top:20px;
   box-shadow: 3px 3px 5px rgba(100,100,100,0.5);
   transform: translate(-50%, -50%);
-<<<<<<< HEAD
   top:50%;
-=======
-  top:440px;
->>>>>>> origin/develop
   left: 50%;
   position:fixed;
 }
