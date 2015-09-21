@@ -22,24 +22,20 @@
 	border-radius:50px;
 	height: 24px;
 	width: 230px;
-  position:fixed;
-  float:left;
 }
 .right-login-float{
 	width:230px;
 	height: 150px;
-	transform:translateY(-32%);
+	transform:translateY(85%);
 	position:relative;
-	top:50%;
 	float:right;
 	margin-right: 20px;
 }
 .left-signup-float{
 	width:230px;
 	height:290px;
-	transform:translateY(-41%);
+	transform:translateY(15%);
 	position:relative;
-	top:50%;
 	float:left;
 	margin-left: 20px;
 }
@@ -48,7 +44,7 @@
 	line-height: 26px;
 	width: 26px;
 	height:26px;
-	font-weight: 370;
+	font-weight: 400;
 	transform:translate(-50%,-50%);
 	position:fixed;
 	top:50%;
@@ -60,22 +56,13 @@
 	height: 100%;
 }
 .button-pos{
-	transform:translate(53%, 140%);
+	transform:translate(-50%, 45%);
+	left:50%;
 	position:relative;
 	width: 108px;
 	height:33px;
-	float: none;
-}
-.button-left {
-	transform: translateX(-50%);
-	left:50%;
-}
-.button-right {
-	transform: translateX(-50%);
-	right:7%;
 }
 .button {
-	position:fixed;
 	display:inline-block;
 	outline: none;
 	cursor: pointer;
