@@ -19,7 +19,7 @@
 }
 .textBox {
 	font-size: 16px;
-	border-radius:50px;
+	border-radius:10px; <!--Sean, I absolutely HATE how rounded these were. Let's change it to ten and I'm using your class now?:] -->
 	height: 24px;
 	width: 230px;
 }
