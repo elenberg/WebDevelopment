@@ -6,7 +6,7 @@
   <meta name="description" content="A demo for web development">
   <link rel="stylesheet" href="../resources/css/siteStyles.css">
   <link rel="stylesheet" href="../resources/css/searchStyles.css">
-	<script src="../resources/js/server.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=drawing"></script>
 	<script src="../resources/js/searchFunctions.js"></script>
 </head>
 
@@ -50,8 +50,7 @@ https://instagram.com/oauth/authorize/?client_id=6d4a587bb3964022a95eb6241eec6b8
 		      	<input  id="dateText"class="search-box" type="text" name="searchDate" placeholder="Date Posted">
 						<img class="save-search" onclick="pinDate()" src="../resources/images/pin-icon.png" alt="Pin Search">
 		    	<div class="search-label">Location</div>
-		      	<input  id="locationText"class="search-box" type="text" name="searchLocation" placeholder="Zip Code">
-						<img class="save-search" onclick="pinLocation()" src="../resources/images/pin-icon.png" alt="Pin Search">
+						<div class="search-box" id="map-canvas"></div>
 		    </form>
 
 				<div class="search-filters">

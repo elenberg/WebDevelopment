@@ -242,6 +242,13 @@ h1, h2, h3, h4, h5, h6 {
   width: 22px;
 }
 
+  #map-canvas {
+    margin: 5px;
+    border-radius: 5px;
+    width: 96%;
+    height: 200px;
+  }
+
 /*------------------------------------*\
             Search Filters
 \*------------------------------------*/

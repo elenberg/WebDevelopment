@@ -1,8 +1,16 @@
+// ************************
+//      Global Vars
+// ************************
 var savedSearchesList = [];
 var currentFilterList = [];
+var myCenter = new google.maps.LatLng(41.742021, -111.814519);
 
+// ************************
+//      On Page Load
+// ************************
 document.addEventListener('DOMContentLoaded', function() {
     loadSavedSearches();
+    initializeMap();
 }, false);
 
 function loadSavedSearches() {
@@ -10,6 +18,9 @@ function loadSavedSearches() {
   updatePinnedSearches();
 }
 
+// ************************
+//    Current Filters
+// ************************
 function addToCurrentFilters(index) {
   currentFilterList.push(savedSearchesList[index]);
   updateCurrentFilters();
@@ -31,6 +42,9 @@ function updateCurrentFilters() {  var htmlText = "";
   document.getElementById("currentSearchFilters").innerHTML = htmlText;
 }
 
+// ************************
+//     Pinned Searches
+// ************************
 function pinHashtag(){
   if (document.getElementById("hashtagText").value) {
     savedSearchesList.push(document.getElementById("hashtagText").value);
@@ -83,4 +97,22 @@ function updatePinnedSearches(){
   }
   document.getElementById("pinnedSearchItems").innerHTML = htmlText;
   localStorage.setItem("savedSearchesList", JSON.stringify(savedSearchesList));
+}
+
+// ************************
+//      Map Search
+// ************************
+
+function initializeMap(){
+	var mapOptions = {
+		center: myCenter,
+		zoom: 11,
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+    streetViewControl: false,
+    zoomControl: false,
+    mapTypeControl: false
+	};
+
+	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  map.data.setDrawingMode("Point");
 }
