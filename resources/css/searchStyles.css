@@ -202,10 +202,13 @@ h1, h2, h3, h4, h5, h6 {
 /*------------------------------------*\
             Search Bar
 \*------------------------------------*/
-.search-bar {
+.search {
   margin: 25px 10px 0 0;
   width: 260px;
   float: left;
+}
+
+.search form {
 	border-width: 1px;
 	border-radius: 5px;
 	border-color: lightgrey;
@@ -238,3 +241,64 @@ h1, h2, h3, h4, h5, h6 {
   height: 25px;
   width: 22px;
 }
+
+/*------------------------------------*\
+            Search Filters
+\*------------------------------------*/
+.search-filters {
+  margin: 15px 0 0 0;
+}
+
+  .search-filters ul li {
+    float: left;
+    margin: 0;
+  }
+
+  .search-filters a {
+    border-radius: 0 5px 5px 0;
+    max-width: 300px;
+    border: solid 2px #CCC;
+    background-color: #CCC;
+    float: left;
+    padding: 5px;
+    margin: 5px 0 0 0;
+  }
+
+  .search-filters a:hover {
+      border: solid 2px #DDD;
+      background-color: #DDD;
+      -webkit-transition: border 500ms;
+      -moz-transition: border 500ms;
+      -o-transition: border 500ms;
+      transition: border 500ms;
+      -webkit-transition: background-color 500ms;
+      -moz-transition: background-color 500ms;
+      -o-transition: background-color 500ms;
+      transition: background-color 500ms;
+  }
+
+  .search-filters button {
+      border-radius: 5px 0 0 5px;
+      background-color: #CCC;
+      max-width: 20%;
+      border: solid 2px #CCC;
+      float: left;
+      height: 32px;
+      width: 25px;
+      text-align: center;
+      vertical-align:middle;
+      margin: 5px 0 0 0;
+  }
+
+  .search-filters button:hover {
+      border: solid 2px #DDD;
+      background-color: #DDD;
+      -webkit-transition: border 500ms;
+      -moz-transition: border 500ms;
+      -o-transition: border 500ms;
+      transition: border 500ms;
+      -webkit-transition: background-color 500ms;
+      -moz-transition: background-color 500ms;
+      -o-transition: background-color 500ms;
+      transition: background-color 500ms;
+  }

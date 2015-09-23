@@ -31,45 +31,35 @@ https://instagram.com/oauth/authorize/?client_id=6d4a587bb3964022a95eb6241eec6b8
 			<div class="pinned-searches">
 				<ul>
 					<li id="pinnedSearchItems"></li>
-					<li><button>X</button><a>some term</a></li>
-					<li><button>X</button><a>another term</a></li>
-					<li><button>X</button><a>#asearchtermIwouldliketodemonstrate</a></li>
-					<li><button>X</button><a>A comment string</a></li>
-					<li><button>X</button><a>June 7 - Oct 8</a></li>
-					<li><button>X</button><a>Year 2015</a></li>
-					<li><button>X</button><a>10+ likes</a></li>
-					<li><button>X</button><a>1,000,000+ comments</a></li>
-					<li><button>X</button><a>some term</a></li>
-					<li><button>X</button><a>another term</a></li>
-					<li><button>X</button><a>#nolengthrestrictions!</a></li>
-					<li><button>X</button><a>A comment string</a></li>
-					<li><button>X</button><a>June 7 - Oct 8</a></li>
-					<li><button>X</button><a>Year 2025</a></li>
-					<li><button>X</button><a>100+ likes</a></li>
-					<li><button>X</button><a>1,000,000+ comments</a></li>
-					<li><button>X</button><a>10+ likes</a></li>
-					<li><button>X</button><a>1,000,000+ comments</a></li>
 				</ul>
 			</div>
 		</div>
     <div class="cs-squeeze">
-      <form class="search-bar">
-				<div class="search-label">Hashtags</div>
-					<input id="hashtagText" class="search-box" type="text" name="searchHashtags" placeholder="Hashtags">
-					<img class="save-search" onclick="pinHashtag()" src="../resources/images/pin-icon.png" alt="Pin Search">
-        <div class="search-label">Caption</div>
-        	<input id="captionText" class="search-box" type="text" name="searchTitle" placeholder="Caption">
-					<img class="save-search" onclick="pinSearchCritera()" src="../resources/images/pin-icon.png" alt="Pin Search">
-      	<div class="search-label">Comments</div>
-	        <input class="search-box" type="text" name="searchComments" placeholder="Comments">
-					<img class="save-search" onclick="pinSearchCritera()" src="../resources/images/pin-icon.png" alt="Pin Search">
-      	<div class="search-label">Date Posted</div>
-        	<input class="search-box" type="text" name="searchDate" placeholder="Date Posted">
-					<img class="save-search" onclick="pinSearchCritera()" src="../resources/images/pin-icon.png" alt="Pin Search">
-      	<div class="search-label">Location</div>
-        	<input class="search-box" type="text" name="searchDate" placeholder="Zip Code">
-					<img class="save-search" onclick="pinSearchCritera()" src="../resources/images/pin-icon.png" alt="Pin Search">
-      </form>
+			<div class="search">
+		    <form>
+					<div class="search-label">Hashtags</div>
+						<input id="hashtagText" class="search-box" type="text" name="searchHashtags" placeholder="Hashtags">
+						<img class="save-search" onclick="pinHashtag()" src="../resources/images/pin-icon.png" alt="Pin Search">
+		      <div class="search-label">Caption</div>
+		      	<input id="captionText" class="search-box" type="text" name="searchTitle" placeholder="Caption">
+						<img class="save-search" onclick="pinCaption()" src="../resources/images/pin-icon.png" alt="Pin Search">
+		    	<div class="search-label">Comments</div>
+		        <input  id="commentText"class="search-box" type="text" name="searchComments" placeholder="Comments">
+						<img class="save-search" onclick="pinComment()" src="../resources/images/pin-icon.png" alt="Pin Search">
+		    	<div class="search-label">Date Posted</div>
+		      	<input  id="dateText"class="search-box" type="text" name="searchDate" placeholder="Date Posted">
+						<img class="save-search" onclick="pinDate()" src="../resources/images/pin-icon.png" alt="Pin Search">
+		    	<div class="search-label">Location</div>
+		      	<input  id="locationText"class="search-box" type="text" name="searchLocation" placeholder="Zip Code">
+						<img class="save-search" onclick="pinLocation()" src="../resources/images/pin-icon.png" alt="Pin Search">
+		    </form>
+
+				<div class="search-filters">
+					<ul>
+						<li id="currentSearchFilters"></li>
+					</ul>
+				</div>
+			</div>
 
       <div class="box-wrap cs-clear">
         <div class="box">
