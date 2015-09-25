@@ -125,6 +125,7 @@ div#header {
   box-shadow: 2px 3px 5px rgba(100, 100, 100, 0.75);
 }
 body{
+  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
   margin: 0;
   background: #F0F0F0;
 }
