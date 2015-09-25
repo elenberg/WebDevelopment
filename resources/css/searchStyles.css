@@ -32,11 +32,11 @@ h1, h2, h3, h4, h5, h6 {
 
   .pinned-searches a:hover {
       border: solid 2px #DDD;
-      background-color: #DDD;
       -webkit-transition: border 500ms;
       -moz-transition: border 500ms;
       -o-transition: border 500ms;
       transition: border 500ms;
+      background-color: #DDD;
       -webkit-transition: background-color 500ms;
       -moz-transition: background-color 500ms;
       -o-transition: background-color 500ms;
@@ -84,6 +84,17 @@ h1, h2, h3, h4, h5, h6 {
   border: solid 1px #CCC;
   float: left;
   padding: 5px;
+}
+.box:hover {
+  background-color: #787878;
+  -webkit-transition: border 500ms;
+  -moz-transition: border 500ms;
+  -o-transition: border 500ms;
+  transition: border 500ms;
+  -webkit-transition: background-color 500ms;
+  -moz-transition: background-color 500ms;
+  -o-transition: background-color 500ms;
+  transition: background-color 500ms;
 }
   .box:nth-child(n) {
     margin-bottom: 2%;

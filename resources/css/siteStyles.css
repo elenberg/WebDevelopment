@@ -20,8 +20,8 @@ html {
 body {
   background: #F0F0F0;
   color: #494949;
-  font-family: sans-serif;
   height: 100%;
+  margin: 0;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -93,7 +93,6 @@ body {
   text-align: right;
 }
 #menu a:link, a:visited {
-  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
 	font-size: 23px;
 	font-style: normal;
 	font-variant: small-caps;
@@ -123,9 +122,4 @@ div#header {
   margin 0;
   background: linear-gradient(black, grey);
   box-shadow: 2px 3px 5px rgba(100, 100, 100, 0.75);
-}
-body{
-  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
-  margin: 0;
-  background: #F0F0F0;
 }
