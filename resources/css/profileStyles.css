@@ -1,8 +1,23 @@
+/*---------------------------\*
+           GENERAL
+\*---------------------------*/
+
 .mb-wrapper {
   width: auto;
   height: auto;
   margin-left: auto;
   margin-right: auto;
+}
+
+/*---------------------------\*
+       PROFILE PICTURE
+\*---------------------------*/
+
+.picture {
+  width: 250px;
+  height: 250px;
+  border: 5px solid black;
+  border-radius: 250px;
 }
 
 #profilepicture {
@@ -14,11 +29,11 @@
   font-variant: small-caps;
 }
 
-.picture {
-  width: 250px;
-  height: 250px;
-  border: 5px solid black;
-  border-radius: 250px;
+/*---------------------------\*
+            FORM
+\*---------------------------*/
+.form {
+  padding: 50px;
 }
 
 .mb-wrapper form {
@@ -35,9 +50,6 @@
   font-variant: small-caps;
 }
 
-.form {
-  padding: 50px;
-}
 .mb-wrapper .form div {
   padding: 10px;
 }
