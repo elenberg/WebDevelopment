@@ -83,6 +83,17 @@
     margin: 0 0 5px 0;
     width: 100%;
   }
+  .box:hover {
+    background-color: #787878;
+    -webkit-transition: border 500ms;
+    -moz-transition: border 500ms;
+    -o-transition: border 500ms;
+    transition: border 500ms;
+    -webkit-transition: background-color 500ms;
+    -moz-transition: background-color 500ms;
+    -o-transition: background-color 500ms;
+    transition: background-color 500ms;
+  }
 
   .box button {
     border-radius: 5px;
