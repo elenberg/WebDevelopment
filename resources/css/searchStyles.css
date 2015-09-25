@@ -242,9 +242,19 @@ h1, h2, h3, h4, h5, h6 {
   width: 22px;
 }
 
+.pinned-search-toggle{
+  margin: 10px 0 0 15px;
+  padding: 5px;
+  width: 130px;
+  border: solid  1px #BBB;
+  border-radius: 5px;
+  background-color: #EEE;
+}
+
   #map-canvas {
-    margin: 5px;
     border-radius: 5px;
+    border: solid 1px #CCC;
+    margin: 5px;
     width: 96%;
     height: 200px;
   }
@@ -258,7 +268,7 @@ h1, h2, h3, h4, h5, h6 {
 
   .search-filters ul li {
     float: left;
-    margin: 0;
+    margin: 3px;
   }
 
   .search-filters a {
@@ -308,4 +318,12 @@ h1, h2, h3, h4, h5, h6 {
       -moz-transition: background-color 500ms;
       -o-transition: background-color 500ms;
       transition: background-color 500ms;
+  }
+
+  /*------------------------------------*\
+                  ¡ERRORS
+  \*------------------------------------*/
+
+  .error {
+    border: 2px solid red;
   }

@@ -1,26 +1,132 @@
+$(document).ready(function(){
+  // Global variables
+  var myCenter = new google.maps.LatLng(41.742021, -111.814519);
+
+  savedSearchesList = JSON.parse(localStorage.getItem("savedSearchesList"));
+  updatePinnedSearches();
+
+  $('.pinned-search-toggle').click(function(e){
+    e.preventDefault();
+    e.stopPropagation();
+
+    if ($(this).hasClass('visible'))
+    {
+      $(this).removeClass('visible');
+      $('.pinned-search-items').hide('slide', {direction: 'up'}, 1000);
+    }
+    else
+    {
+      $(this).addClass('visible');
+      $('.pinned-search-items').show('slide', {direction: 'up'}, 1000);
+    }
+  });
+
+  // Modify search function
+  $('.search').click(function(e){
+    e.preventDefault();
+    e.stopPropagation();
+
+    var query = $('.search-input').val();
+
+    if (query === '')
+    {
+      $('.search-input').addClass('error');
+    }
+    else if (query.indexOf('#') != -1)
+    {
+      $('.search-input').addClass('error');
+    }
+    else
+    {
+      $('.search-input').removeClass('error');
+      $('.search-results').html(query);
+    }
+  });
+
+  // Toggle sidebar function
+  $('.sidebar-toggle').click(function(e)
+  {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if ($(this).hasClass('visible'))
+    {
+      $(this).removeClass('visible');
+      $('.sidebar').hide('slide', {direction: 'left'}, 1000);
+    }
+    else
+    {
+      $(this).addClass('visible');
+      $('.sidebar').show('slide', {direction: 'left'}, 1000);
+    }
+
+  });
+
+
+  // ************************
+  //      Map Search
+  // ************************
+  	var mapOptions = {
+  		center: myCenter,
+  		zoom: 11,
+  		mapTypeId: google.maps.MapTypeId.ROADMAP,
+      streetViewControl: false,
+      zoomControl: false,
+      mapTypeControl: false
+  	};
+
+  	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    map.data.setDrawingMode("Point");
+});
+
 // ************************
 //      Global Vars
 // ************************
 var savedSearchesList = [];
 var currentFilterList = [];
-var myCenter = new google.maps.LatLng(41.742021, -111.814519);
-
-// ************************
-//      On Page Load
-// ************************
-document.addEventListener('DOMContentLoaded', function() {
-    loadSavedSearches();
-    initializeMap();
-}, false);
-
-function loadSavedSearches() {
-  savedSearchesList = JSON.parse(localStorage.getItem("savedSearchesList"));
-  updatePinnedSearches();
-}
+var activeHastagFilter = "";
+var activeCaptionFilter = "";
+var activeCommentFilter = "";
+var activeDateilter = "";
+var activeMapFilter = "";
 
 // ************************
 //    Current Filters
 // ************************
+function setActiveSearchFilters(){
+  alert("Sup");
+  activeHastagFilter = document.getElementById("hashtagText").value;
+  activeCaptionFilter = document.getElementById("captionText").value;
+  activeCommentFilter = document.getElementById("commentText").value;
+  activeDateFilter = document.getElementById("dateText").value;
+
+  var htmlText = "";
+  var opening = "<li>";
+  var closing = "</li>";
+
+  if (activeHastagFilter != "")
+  {
+    htmlText += opening + activeHastagFilter + closing;
+  }
+
+  if (activeCaptionFilter != "")
+  {
+    htmlText += opening + activeCaptionFilter + closing;
+  }
+
+  if (activeCommentFilter != "")
+  {
+    htmlText += opening + activeCommentFilter + closing;
+  }
+
+  if (activeDateFilter != "")
+  {
+    htmlText += opening + activeDateFilter + closing;
+  }
+
+  document.getElementById("activeSearchFilters").innerHTML = htmlText;
+}
+
 function addToCurrentFilters(index) {
   currentFilterList.push(savedSearchesList[index]);
   updateCurrentFilters();
@@ -97,22 +203,4 @@ function updatePinnedSearches(){
   }
   document.getElementById("pinnedSearchItems").innerHTML = htmlText;
   localStorage.setItem("savedSearchesList", JSON.stringify(savedSearchesList));
-}
-
-// ************************
-//      Map Search
-// ************************
-
-function initializeMap(){
-	var mapOptions = {
-		center: myCenter,
-		zoom: 11,
-		mapTypeId: google.maps.MapTypeId.ROADMAP,
-    streetViewControl: false,
-    zoomControl: false,
-    mapTypeControl: false
-	};
-
-	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  map.data.setDrawingMode("Point");
 }

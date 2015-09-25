@@ -6,13 +6,12 @@
   <meta name="description" content="A demo for web development">
   <link rel="stylesheet" href="../resources/css/siteStyles.css">
   <link rel="stylesheet" href="../resources/css/searchStyles.css">
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=drawing"></script>
 	<script src="../resources/js/searchFunctions.js"></script>
 </head>
-
-<!--
-https://instagram.com/oauth/authorize/?client_id=6d4a587bb3964022a95eb6241eec6b8a&redirect_uri=Rhttp://209.95.48.196/WebDevelopment/pages/dashboard.html&response_type=code
--->
 
 <body>
   <div id="header">
@@ -28,9 +27,10 @@ https://instagram.com/oauth/authorize/?client_id=6d4a587bb3964022a95eb6241eec6b8
 
   <div class="cs-content">
 		<div class="cs-squeeze">
+			<button class="pinned-search-toggle visible">Toggle Pins</button>
 			<div class="pinned-searches">
 				<ul>
-					<li id="pinnedSearchItems"></li>
+					<li class="pinned-search-items" id="pinnedSearchItems"></li>
 				</ul>
 			</div>
 		</div>
@@ -39,24 +39,23 @@ https://instagram.com/oauth/authorize/?client_id=6d4a587bb3964022a95eb6241eec6b8
 		    <form>
 					<div class="search-label">Hashtags</div>
 						<input id="hashtagText" class="search-box" type="text" name="searchHashtags" placeholder="Hashtags">
-						<img class="save-search" onclick="pinHashtag()" src="../resources/images/pin-icon.png" alt="Pin Search">
+						<img class="save-search" onclick="pinHashtag()" onkeypress="setActiveSearchFilters()" src="../resources/images/pin-icon.png" alt="Pin Search">
 		      <div class="search-label">Caption</div>
 		      	<input id="captionText" class="search-box" type="text" name="searchTitle" placeholder="Caption">
-						<img class="save-search" onclick="pinCaption()" src="../resources/images/pin-icon.png" alt="Pin Search">
+						<img class="save-search" onclick="pinCaption()" onchange="setActiveSearchFilters()" src="../resources/images/pin-icon.png" alt="Pin Search">
 		    	<div class="search-label">Comments</div>
 		        <input  id="commentText"class="search-box" type="text" name="searchComments" placeholder="Comments">
-						<img class="save-search" onclick="pinComment()" src="../resources/images/pin-icon.png" alt="Pin Search">
+						<img class="save-search" onclick="pinComment()" onchange="setActiveSearchFilters()" src="../resources/images/pin-icon.png" alt="Pin Search">
 		    	<div class="search-label">Date Posted</div>
 		      	<input  id="dateText"class="search-box" type="text" name="searchDate" placeholder="Date Posted">
-						<img class="save-search" onclick="pinDate()" src="../resources/images/pin-icon.png" alt="Pin Search">
+						<img class="save-search" onclick="pinDate()" onchange="setActiveSearchFilters()" src="../resources/images/pin-icon.png" alt="Pin Search">
 		    	<div class="search-label">Location</div>
-						<div class="search-box" id="map-canvas"></div>
+						<div id="map-canvas"></div>
 		    </form>
 
 				<div class="search-filters">
-					<ul>
-						<li id="currentSearchFilters"></li>
-					</ul>
+					<ul id="activeSearchFilters"> </ul>
+					<ul id="currentSearchFilters"></ul>
 				</div>
 			</div>
 
