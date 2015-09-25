@@ -54,3 +54,54 @@
   line-height: 20px;
   text-align:center;
 }
+
+/*------------------------------------*\
+           Image Wrapper
+\*------------------------------------*/
+.box-wrap {
+  margin: 25px 0 0 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.box {
+  border-radius: 5px;
+  width: 30%;
+  border: solid 1px #CCC;
+  float: left;
+  padding: 5px;
+  margin: 1%;
+}
+  .box img {
+    background: rgba(0,0,0,0.5);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin: 0 0 5px 0;
+    width: 100%;
+  }
+
+  .box button {
+    border-radius: 5px;
+    background: #FFF;
+    border: solid 1px #CCC;
+    height: 35px;
+    text-align: center;
+    width: 100px;
+  }
+
+  .box button:hover {
+    border: solid 2px #DDD;
+    background-color: #DDD;
+    -webkit-transition: border 500ms;
+    -moz-transition: border 500ms;
+    -o-transition: border 500ms;
+    transition: border 500ms;
+    -webkit-transition: background-color 500ms;
+    -moz-transition: background-color 500ms;
+    -o-transition: background-color 500ms;
+    transition: background-color 500ms;
+  }

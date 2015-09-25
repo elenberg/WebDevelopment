@@ -1,3 +1,80 @@
+@charset "UTF-8";
+
+/*------------------------------------*\
+              GENERAL
+\*------------------------------------*/
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: #F0F0F0;
+  color: #494949;
+  font-family: sans-serif;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+.cs-content {
+  margin: 5px;
+}
+
+.cs-wrap {
+  height: auto !important;
+  height: 100%;
+  margin-bottom: -100px;
+  min-height: 100%;
+  position: relative;
+}
+
+.cs-clear:after, .cs-squeeze:after {
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+}
+
+.cs-squeeze {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  max-width: 1500px;
+}
+
+.clear {
+  display: block;
+  float: none;
+  clear: both;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.pull--right {
+  float: right !important;
+}
+
+.pull--left {
+  float: left !important;
+}
+
+
 #menu {
   text-align: center;
 }
