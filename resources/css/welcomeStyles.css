@@ -1,5 +1,4 @@
 .form-wrap {
-	/*font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;*/
 	font-size: 18px;
 	line-height: 16px;
 	font-style: normal;
@@ -26,7 +25,8 @@
 .right-login-float{
 	width:230px;
 	height: 150px;
-	transform:translateY(85%);
+	transform:translateY(-18.5%);
+	top:50%;
 	position:relative;
 	float:right;
 	margin-right: 20px;
@@ -34,7 +34,7 @@
 .left-signup-float{
 	width:230px;
 	height:290px;
-	transform:translateY(15%);
+	transform:translateY(32.5%);
 	position:relative;
 	float:left;
 	margin-left: 20px;
