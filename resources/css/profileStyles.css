@@ -25,7 +25,7 @@
   height: 300px;
   padding-top: 50px;
   font-size: 24px;
-  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+  /*font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;*/
   font-variant: small-caps;
 }
 
@@ -37,16 +37,16 @@
 }
 
 .mb-wrapper form {
-  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+  /*font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;*/
   font-size: 12px;
   background-color: inherit;
   padding: 10px;
 }
 
 .mb-wrapper .form input {
-  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+  /*font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;*/
   font-size: 18px;
-  <--box-shadow: 5px 5px 5px black;
+  box-shadow: 5px 5px 5px black;
   font-variant: small-caps;
 }
 
