@@ -4,7 +4,7 @@
 	font-style: normal;
 	font-variant: small-caps;
 	font-weight: 400;
-	width: 550px;
+	width: 560px;
 	height: 370px;
 	transform:translate(-50%,-60%);
 	position:relative;
@@ -25,20 +25,19 @@
 }
 .right-login-float{
 	width:230px;
-	height: 150px;
-	transform:translateY(-22%);
+	height: 128px;
+	transform:translate(-50%,-28%);
+	left:76%;
 	top:50%;
-	position:relative;
-	float:right;
-	margin-right: 20px;
+	position:fixed;
 }
 .left-signup-float{
 	width:230px;
-	height:290px;
-	transform:translateY(27%);
-	position:relative;
-	float:left;
-	margin-left: 20px;
+	height:265px;
+	transform:translate(-50%,-39%);
+	left:24%;
+	top: 50%;
+	position:fixed;
 }
 .center-divider{
 	font-size: 26px;
