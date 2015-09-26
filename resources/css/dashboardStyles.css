@@ -74,15 +74,6 @@
   padding: 5px;
   margin: 1%;
 }
-  .box img {
-    background: rgba(0,0,0,0.5);
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    display: block;
-    margin: 0 0 5px 0;
-    width: 100%;
-  }
   .box:hover {
     background-color: #787878;
     -webkit-transition: border 500ms;
@@ -93,6 +84,15 @@
     -moz-transition: background-color 500ms;
     -o-transition: background-color 500ms;
     transition: background-color 500ms;
+  }
+  .box img {
+    background: rgba(0,0,0,0.5);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin: 0 0 5px 0;
+    width: 100%;
   }
 
   .box button {

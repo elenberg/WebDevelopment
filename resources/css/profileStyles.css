@@ -25,7 +25,10 @@
   height: 300px;
   padding-top: 50px;
   font-size: 24px;
+<<<<<<< HEAD
   /*font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;*/
+=======
+>>>>>>> 71bf8bdb312791d05929f8deb15fc40905e97271
   font-variant: small-caps;
 }
 
@@ -37,14 +40,20 @@
 }
 
 .mb-wrapper form {
+<<<<<<< HEAD
   /*font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;*/
+=======
+>>>>>>> 71bf8bdb312791d05929f8deb15fc40905e97271
   font-size: 12px;
   background-color: inherit;
   padding: 10px;
 }
 
 .mb-wrapper .form input {
+<<<<<<< HEAD
   /*font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', fantasy, 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;*/
+=======
+>>>>>>> 71bf8bdb312791d05929f8deb15fc40905e97271
   font-size: 18px;
   box-shadow: 5px 5px 5px black;
   font-variant: small-caps;
@@ -60,7 +69,7 @@
 
 #SaveButton {
   border-radius: 10px;
-  float: left;
+  position:relative;
 }
 
 #SaveDiv {

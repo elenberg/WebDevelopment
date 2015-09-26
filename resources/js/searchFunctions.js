@@ -43,26 +43,6 @@ $(document).ready(function(){
     }
   });
 
-  // Toggle sidebar function
-  $('.sidebar-toggle').click(function(e)
-  {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if ($(this).hasClass('visible'))
-    {
-      $(this).removeClass('visible');
-      $('.sidebar').hide('slide', {direction: 'left'}, 1000);
-    }
-    else
-    {
-      $(this).addClass('visible');
-      $('.sidebar').show('slide', {direction: 'left'}, 1000);
-    }
-
-  });
-
-
   // ************************
   //      Map Search
   // ************************
@@ -82,7 +62,7 @@ $(document).ready(function(){
 // ************************
 //      Global Vars
 // ************************
-var savedSearchesList = [];
+var savedSearchesList = [[], [], [], []];
 var currentFilterList = [];
 var activeHastagFilter = "";
 var activeCaptionFilter = "";
@@ -93,35 +73,35 @@ var activeMapFilter = "";
 // ************************
 //    Current Filters
 // ************************
-function setActiveSearchFilters(){
-  alert("Sup");
+function setActiveSearchFilters()
+{
   activeHastagFilter = document.getElementById("hashtagText").value;
   activeCaptionFilter = document.getElementById("captionText").value;
   activeCommentFilter = document.getElementById("commentText").value;
   activeDateFilter = document.getElementById("dateText").value;
 
   var htmlText = "";
-  var opening = "<li>";
-  var closing = "</li>";
+  var opening = "<div><li>";
+  var closing = "</li></div>";
 
   if (activeHastagFilter != "")
   {
-    htmlText += opening + activeHastagFilter + closing;
+    htmlText += opening + "Hashtag: " + activeHastagFilter + closing;
   }
 
   if (activeCaptionFilter != "")
   {
-    htmlText += opening + activeCaptionFilter + closing;
+    htmlText += opening + "Caption: " + activeCaptionFilter + closing;
   }
 
   if (activeCommentFilter != "")
   {
-    htmlText += opening + activeCommentFilter + closing;
+    htmlText += opening + "Comment: " + activeCommentFilter + closing;
   }
 
   if (activeDateFilter != "")
   {
-    htmlText += opening + activeDateFilter + closing;
+    htmlText += opening + "Date: " + activeDateFilter + closing;
   }
 
   document.getElementById("activeSearchFilters").innerHTML = htmlText;
@@ -137,12 +117,43 @@ function removeCurrentFilter(index) {
   updateCurrentFilters();
 }
 
-function updateCurrentFilters() {  var htmlText = "";
-  var searchId = currentFilterList.length;
+function addAsCurrentFilter(type, index)
+{
+  if (type == 0)
+  {
+    document.getElementById('hashtagText').value = savedSearchesList[type][index];
+  }
+  else if (type == 1)
+  {
+    document.getElementById('captionText').value = savedSearchesList[type][index];
+  }
+  else if (type == 2)
+  {
+    document.getElementById('commentText').value = savedSearchesList[type][index];
+  }
+  else if (type == 3)
+  {
+    document.getElementById('dateText').value = savedSearchesList[type][index];
+  }
+
+  setActiveSearchFilters();
+}
+
+function pinAllSearches()
+{
+  pinHashtag();
+  pinCaption();
+  pinDate();
+  pinComment();
+}
+
+function updateCurrentFilters() {
+  var htmlText = "";
   var opening = "<li><button onclick=\"removeCurrentFilter(";
   var middle = ")\"> X</button><a>";
   var closing = "</a></li>";
-  for (i = 0; i < currentFilterList.length; i++) {
+  for (i = 0; i < currentFilterList.length; i++)
+  {
     htmlText += opening + i + middle + currentFilterList[i] + closing;
   }
   document.getElementById("currentSearchFilters").innerHTML = htmlText;
@@ -153,54 +164,60 @@ function updateCurrentFilters() {  var htmlText = "";
 // ************************
 function pinHashtag(){
   if (document.getElementById("hashtagText").value) {
-    savedSearchesList.push(document.getElementById("hashtagText").value);
+    savedSearchesList[0].push(document.getElementById("hashtagText").value);
     updatePinnedSearches();
   }
 }
 
 function pinCaption(){
   if (document.getElementById("captionText").value) {
-    savedSearchesList.push(document.getElementById("captionText").value);
+    savedSearchesList[1].push(document.getElementById("captionText").value);
     updatePinnedSearches();
   }
 }
 
 function pinComment(){
   if (document.getElementById("commentText").value) {
-    savedSearchesList.push(document.getElementById("commentText").value);
+    savedSearchesList[2].push(document.getElementById("commentText").value);
     updatePinnedSearches();
   }
 }
 
 function pinDate(){
   if (document.getElementById("dateText").value) {
-    savedSearchesList.push(document.getElementById("dateText").value);
+    savedSearchesList[3].push(document.getElementById("dateText").value);
     updatePinnedSearches();
   }
 }
 
 function pinLocation(){
   if (document.getElementById("locationText").value) {
-    savedSearchesList.push(document.getElementById("locationText").value);
+    savedSearchesList[3].push(document.getElementById("locationText").value);
     updatePinnedSearches();
   }
 }
 
-function removeSavedTerm(index) {
-  savedSearchesList.splice(index, 1);
+function removeSavedTerm(searchType, searchNumber) {
+  savedSearchesList[searchType].splice(searchNumber, 1);
   updatePinnedSearches();
 }
 
-function updatePinnedSearches(){
+function updatePinnedSearches()
+{
   var htmlText = "";
-  var searchId = savedSearchesList.length;
   var opening = "<li><button onclick=\"removeSavedTerm(";
-  var middle = ")\"> X</button><a onclick=\"addToCurrentFilters(";
+  var middle = ")\"> X</button><a onclick=\"addAsCurrentFilter(";
   var nextMiddle = ")\">";
   var closing = "</a></li>";
-  for (i = 0; i < savedSearchesList.length; i++) {
-    htmlText += opening + i + middle + i + nextMiddle + savedSearchesList[i] + closing;
+  for (i = 0; i < savedSearchesList.length; i++)
+  {
+    for (j = 0; j < savedSearchesList[i].length; j++)
+    {
+      htmlText += opening + i + "," + j + middle + i + "," + j + nextMiddle;
+      htmlText += savedSearchesList[i][j] + closing;
+    }
   }
+
   document.getElementById("pinnedSearchItems").innerHTML = htmlText;
   localStorage.setItem("savedSearchesList", JSON.stringify(savedSearchesList));
 }

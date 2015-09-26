@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../resources/css/profileStyles.css">
     <link rel="stylesheet" href="../resources/css/welcomeStyles.css">
     <link rel="stylesheet" href="../resources/css/siteStyles.css">
+    <link rel="stylesheet" href="../resources/css/buttonStyles.css">
   </head>
   <!--End of head-->
 
@@ -32,15 +33,15 @@
       <center>
         <div id= "profilepicture">
           <img class="picture" src="../resources/images/profile/userimage.png" alt="A beautiful profile picture"/> <!-- Beautiful Indeed -->
-            <p>Username</p>
+            <p><b>BestestCatNameEver</b></p> <!--Because reasons-->
         </div>
         <!--Beginning of div for the profile form-->
         <div class="form">
           <form method="post" action="my_profile.html">
-            <div><input type="text" value="Name" class="textBox"/><br></div> <!-- Mandi: Use my class "textBox" on your text boxes for site continuity. Or we could pick a different style of text box-->
-            <div><input type="text" value="Email Address" class="textBox"/><br></div>
-            <div><input type="text" value="Biography" id="BioBox" class="textBox"/><br></div>
-            <div id="SaveDiv"><input type="submit" value="Save" id="SaveButton"/><br></div>
+            <div><input type="text" placeholder="Name" class="textBox"/><br></div> <!-- Mandi: Use my class "textBox" on your text boxes for site continuity. Or we could pick a different style of text box-->
+            <div><input type="text" placeholder="Email Address" class="textBox"/><br></div>
+            <div><input type="text" placeholder="Biography" id="BioBox" class="textBox"/><br></div>
+            <div id="SaveDiv"><input type="submit" value="Save" class="button orange" id="SaveButton"/><br></div> <!--Added classes for onsistent button style and position-->
             </form>
           </div>
         <!--Ending of div for the profile form-->
