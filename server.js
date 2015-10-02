@@ -6,26 +6,9 @@ var instagram = require('instagram-node').instagram();
 //var RedisStore = require('connect-redis')(express);
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
-
 app.use(express.static(__dirname + '/public'));
-
 app.set('view engine', 'ejs');
-
-/*getting errors everytime I enabled RedisStore or Mongo-store. Not sure why.
-
-app.use(session({
-  store: new RedisStore({
-    db: 'instagramapp',
-    host: '127.0.0.1',
-    port: 3365,
-    prefix: 'sess'
-  })
-}));
-*/
-
-
 app.use(cookieParser());
-
 app.use(session({
   cookieName: 'session',
   secret: 'eg[isfd-8yF9-7w2315df{}+Ijsli;;to8',
@@ -88,9 +71,8 @@ app.get('/', function(req, res) {
 
 app.get('/handleauth', exports.handleauth);
 
-app.get('/dashboard', function(req, res){
+function dashboard(req, res){
 
-  console.log('access_token is ' + req.session.instaToken + ' \n');
   if(req.session.instaToken){//This always returns false. Trying to figure out why it isn't grabbing the session.
 
   instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
@@ -109,11 +91,77 @@ app.get('/dashboard', function(req, res){
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
 });
-/*
-http.createServer(app).listen(app.get(8080), function(){
-  console.log("Express server listening on port " + app.get(8080));
+
+function login(req, res){
+
+  if(req.session.instaToken){//This always returns false. Trying to figure out why it isn't grabbing the session.
+
+  instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
+  res.render('public/pages/index.ejs', {gram: medias });//Add your function here
+  });
+  }
+  else{
+    //console.log('In else statement of dashboard\n' + req.cookies.name + ' Including cookies. Testing.');
+    //For some reason it isn't grabbing the instagram.use from line 27. Not sure why.
+    instagram.use({
+
+      client_id: 'f81f407862d44b03a130dfb1c020c5ff',
+      client_secret: 'd337b5c6f52f4b3a8270d83c2d88ef18'
+
+    });
+    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+  }
 });
-*/
+
+function profile(req, res){
+
+  if(req.session.instaToken){//This always returns false. Trying to figure out why it isn't grabbing the session.
+
+  instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
+  res.render('public/pages/index.ejs', {gram: medias });//Add your function here
+  });
+  }
+  else{
+    //console.log('In else statement of dashboard\n' + req.cookies.name + ' Including cookies. Testing.');
+    //For some reason it isn't grabbing the instagram.use from line 27. Not sure why.
+    instagram.use({
+
+      client_id: 'f81f407862d44b03a130dfb1c020c5ff',
+      client_secret: 'd337b5c6f52f4b3a8270d83c2d88ef18'
+
+    });
+    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+  }
+});
+
+function search(req, res){
+
+  if(req.session.instaToken){//This always returns false. Trying to figure out why it isn't grabbing the session.
+
+  instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
+  res.render('public/pages/index.ejs', {gram: medias });//Add your function here
+  });
+  }
+  else{
+    //console.log('In else statement of dashboard\n' + req.cookies.name + ' Including cookies. Testing.');
+    //For some reason it isn't grabbing the instagram.use from line 27. Not sure why.
+    instagram.use({
+
+      client_id: 'f81f407862d44b03a130dfb1c020c5ff',
+      client_secret: 'd337b5c6f52f4b3a8270d83c2d88ef18'
+
+    });
+    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+  }
+});
+//All Routes here.
+
+app.get('/dashboard', dashboard);
+app.get('/', login);
+app.get('/profile', profile);
+app.get('/search', search);
+
+
 app.listen(8080, function(err){
   if(err){
     console.log("Error");
