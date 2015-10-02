@@ -90,7 +90,7 @@ function dashboard(req, res){
     });
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
-});
+};
 
 function login(req, res){
 
@@ -111,7 +111,7 @@ function login(req, res){
     });
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
-});
+};
 
 function profile(req, res){
 
@@ -132,7 +132,7 @@ function profile(req, res){
     });
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
-});
+};
 
 function search(req, res){
 
@@ -153,7 +153,7 @@ function search(req, res){
     });
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
-});
+};
 //All Routes here.
 
 app.get('/dashboard', dashboard);
