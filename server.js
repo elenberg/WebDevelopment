@@ -165,32 +165,31 @@ function profile(req, res){
   }
 };
 
-function search(req, res){
 
+//All Routes here.
+
+app.get('/dashboard', dashboard);
+app.get('/', login);
+app.get('/profile', profile);
+
+
+app.get('/search', function(req, res){
   if(req.session.instaToken){//This always returns false. Trying to figure out why it isn't grabbing the session.
 
   instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-  res.render('public/pages/index.ejs', {gram: medias });//Add your function here
+  res.render('search', {gram: instagram});//Add your function here
   });
   }
   else{
     //console.log('In else statement of dashboard\n' + req.cookies.name + ' Including cookies. Testing.');
     //For some reason it isn't grabbing the instagram.use from line 27. Not sure why.
     instagram.use({
-
       client_id: 'f81f407862d44b03a130dfb1c020c5ff',
       client_secret: 'd337b5c6f52f4b3a8270d83c2d88ef18'
-
     });
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
-};
-//All Routes here.
-
-app.get('/dashboard', dashboard);
-app.get('/', login);
-app.get('/profile', profile);
-app.get('/search', search);
+});
 
 
 app.listen(8080, function(err){
