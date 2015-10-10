@@ -2,12 +2,17 @@ var express = require('express');
 var url = require('url');
 var app = express();
 var http = require('http');
+var exphbs = require('express-handlebars');
 var instagram = require('instagram-node').instagram();
 //var RedisStore = require('connect-redis')(express);
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
-app.use(express.static(__dirname + '/public'));
-app.set('view engine', 'ejs');
+//app.use(express.static(__dirname + '/public'));
+
+
+app.engine('handlebars', exphbs({defaultLayout: 'base'}));
+app.set('view engine', 'handlebars');
+app.use(express.static(__dirname));
 app.use(cookieParser());
 app.use(session({
   cookieName: 'session',
@@ -27,8 +32,8 @@ instagram.use({
 
 });
 
-var redirect_uri = 'http://209.95.48.196:8080/handleauth';
-var homepage_uri = 'http://209.95.48.196:8080/dashboard';
+var redirect_uri = 'http://localhost:8080/handleauth';
+var homepage_uri = 'http://localhost:8080/dashboard';
 
 exports.authorize_user = function(req, res) {
   instagram.use({
@@ -61,7 +66,7 @@ exports.handleauth = function(req, res) {
 
 app.get('/', function(req, res) {
   if(req.session.instaToken === undefined){
-    console.log('Undefined isn\'t it?' + req.session.instaToken + ' ');
+    console.log('If undefinded redirect token = ' + req.session.instaToken + ' ');
     res.redirect(homepage_uri);
   }
   else{
@@ -70,13 +75,13 @@ app.get('/', function(req, res) {
 });
 
 app.get('/handleauth', exports.handleauth);
-
+/* original dashboard
 function dashboard(req, res){
 
   if(req.session.instaToken){//This always returns false. Trying to figure out why it isn't grabbing the session.
 
   instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-  res.render('public/pages/index.ejs', {gram: medias });
+  res.render('public/pages/dashboard.ejs', {gram: medias });
   });
   }
   else{
@@ -91,7 +96,33 @@ function dashboard(req, res){
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
 };
+*/
 
+function dashboard(req, res){
+
+  if(req.session.instaToken){
+  instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
+    console.log("Loading Handlebars");
+  res.render('dashboard', {
+    layout:'base',
+    gram: medias,
+    title: req.session.username +'\'s Dashboard',
+    body: 'Welcome to ' + req.session.username +'\'s Dashboard'
+  })
+  })
+  }
+  else{
+    //console.log('In else statement of dashboard\n' + req.cookies.name + ' Including cookies. Testing.');
+    //For some reason it isn't grabbing the instagram.use from line 27. Not sure why.
+    instagram.use({
+
+      client_id: 'f81f407862d44b03a130dfb1c020c5ff',
+      client_secret: 'd337b5c6f52f4b3a8270d83c2d88ef18'
+
+    });
+    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+  }
+};
 function login(req, res){
 
   if(req.session.instaToken){//This always returns false. Trying to figure out why it isn't grabbing the session.

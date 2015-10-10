@@ -1,0 +1,15 @@
+<div class="container">
+  <div id="grid">
+    {{#each gram}}
+      <div class="box">
+        <div class="instagram-pic col-sm-3">
+          <a href="{{this.link}}" target= "_blank">
+             <img src="{{this.images.standard_resolution.url}}" class= "img-responsive">
+          </a>
+          <button class="pull--left"> {{ this.comments.count }} comments</button>
+          <button class="pull--right">{{this.likes.count}} likes</button>
+        </div>
+      </div>
+      {{/each}}
+  </div>
+</div>
