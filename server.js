@@ -27,6 +27,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+
 instagram.use({
   client_id: cid,
   client_secret: clsec
@@ -55,10 +56,12 @@ exports.handleauth = function(req, res) {
       res.redirect(homepage_uri);
     }
   });
+
 };
 
 function auth(req, res) {
   console.log("Received new request for homepage");
+
   if(req.session.instaToken === undefined) {
     console.log('If undefinded redirect token = ' + req.session.instaToken + ' ');
     res.redirect(homepage_uri);
@@ -150,7 +153,7 @@ function search(req, res) {
 
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
-  
+
 };
 //All Routes here.
 app.get('/', auth);
