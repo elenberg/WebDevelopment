@@ -6,13 +6,16 @@ var exphbs = require('express-handlebars');
 var instagram = require('instagram-node').instagram();
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+
 var cid = 'f81f407862d44b03a130dfb1c020c5ff'
 var clsec = 'd337b5c6f52f4b3a8270d83c2d88ef18'
 
 app.engine('handlebars', exphbs({defaultLayout: 'base'}));
 app.set('view engine', 'handlebars');
+
 app.use(express.static(__dirname));
 app.use(cookieParser());
+
 app.use(session({
   cookieName: 'session',
   secret: 'eg[isfd-8yF9-7w2315df{}+Ijsli;;to8',
@@ -25,10 +28,8 @@ app.use(session({
   saveUninitialized: true
 }));
 instagram.use({
-
   client_id: cid,
   client_secret: clsec
-
 });
 
 var redirect_uri = 'http://localhost:8080/handleauth';
@@ -40,7 +41,9 @@ exports.handleauth = function(req, res) {
     if (err) {
       console.log(err.body);
       res.send("Didn't work");
-    } else {
+    }
+
+    else {
       console.log('Yay! Access token is ' + result.access_token + ' And more information' + result.user.id);
       instagram.use({access_token: result.access_token});
       req.session.instaToken = result.access_token;
@@ -56,11 +59,12 @@ exports.handleauth = function(req, res) {
 
 function auth(req, res) {
   console.log("Received new request for homepage");
-  if(req.session.instaToken === undefined){
+  if(req.session.instaToken === undefined) {
     console.log('If undefinded redirect token = ' + req.session.instaToken + ' ');
     res.redirect(homepage_uri);
   }
-  else{
+
+  else {
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
 };
@@ -82,13 +86,13 @@ function dashboard(req, res) {
 
   else {
     instagram.use({
-
       client_id: cid,
       client_secret: clsec
-
     });
+
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
+
 };
 
 function login(req, res) {
@@ -106,6 +110,7 @@ function login(req, res) {
     });
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
+
 };
 
 function profile(req, res) {
@@ -126,6 +131,7 @@ function profile(req, res) {
 
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
+
 };
 
 function search(req, res) {
@@ -144,6 +150,7 @@ function search(req, res) {
 
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
+  
 };
 //All Routes here.
 app.get('/', auth);
