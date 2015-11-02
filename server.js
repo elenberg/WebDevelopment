@@ -6,7 +6,8 @@ var exphbs = require('express-handlebars');
 var instagram = require('instagram-node').instagram();
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
-
+var cid = 'f81f407862d44b03a130dfb1c020c5ff'
+var clsec = 'd337b5c6f52f4b3a8270d83c2d88ef18'
 
 app.engine('handlebars', exphbs({defaultLayout: 'base'}));
 app.set('view engine', 'handlebars');
@@ -25,8 +26,8 @@ app.use(session({
 }));
 instagram.use({
 
-  client_id: 'f81f407862d44b03a130dfb1c020c5ff',
-  client_secret: 'd337b5c6f52f4b3a8270d83c2d88ef18'
+  client_id: cid,
+  client_secret: clsec
 
 });
 
@@ -67,79 +68,80 @@ function auth(req, res) {
 app.get('/handleauth', exports.handleauth);
 
 
-function dashboard(req, res){
+function dashboard(req, res) {
 
-  if(req.session.instaToken){
-  instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-  res.render('dashboard', {
-    layout:'base',
-    gram: medias,
-    title: req.session.username
-  })
-  })
-  }
-  else{
-    instagram.use({
-
-      client_id: 'f81f407862d44b03a130dfb1c020c5ff',
-      client_secret: 'd337b5c6f52f4b3a8270d83c2d88ef18'
-
-    });
-    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
-  }
-};
-function login(req, res){
-
-  if(req.session.instaToken){
-  instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-  res.render('public/pages/index.ejs', {gram: medias });//Add your function here
-  });
-  }
-  else{
-    instagram.use({
-
-      client_id: 'f81f407862d44b03a130dfb1c020c5ff',
-      client_secret: 'd337b5c6f52f4b3a8270d83c2d88ef18'
-
-    });
-    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
-  }
-};
-
-function profile(req, res){
-
-  if(req.session.instaToken){
+  if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-  res.render('public/pages/index.ejs', {gram: medias });//Add your function here
-  });
+      res.render('dashboard', {
+        layout:'base',
+        gram: medias,
+        title: req.session.username
+      })
+    })
   }
-  else{
+
+  else {
+    instagram.use({
+
+      client_id: cid,
+      client_secret: clsec
+
+    });
+    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+  }
+};
+
+function login(req, res) {
+
+  if(req.session.instaToken) {
+    instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
+      res.render('public/pages/index.ejs', {gram: medias });//Add your function here
+    });
+  }
+
+  else {
+    instagram.use({
+      client_id: cid,
+      client_secret: clsec
+    });
+    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+  }
+};
+
+function profile(req, res) {
+
+  if(req.session.instaToken) {
+    instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
+        res.render('public/pages/index.ejs', {gram: medias });//Add your function here
+    });
+  }
+
+  else {
     //console.log('In else statement of dashboard\n' + req.cookies.name + ' Including cookies. Testing.');
     //For some reason it isn't grabbing the instagram.use from line 27. Not sure why.
     instagram.use({
-
-      client_id: 'f81f407862d44b03a130dfb1c020c5ff',
-      client_secret: 'd337b5c6f52f4b3a8270d83c2d88ef18'
-
+      client_id: cid,
+      client_secret: clsec
     });
+
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
 };
 
-function search(req, res){
+function search(req, res) {
 
-  if(req.session.instaToken){
-  instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-  res.render('public/pages/index.ejs', {gram: medias });//Add your function here
-  });
-  }
-  else{
-    instagram.use({
-
-      client_id: 'f81f407862d44b03a130dfb1c020c5ff',
-      client_secret: 'd337b5c6f52f4b3a8270d83c2d88ef18'
-
+  if(req.session.instaToken) {
+    instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
+      res.render('public/pages/index.ejs', {gram: medias });//Add your function here
     });
+  }
+
+  else {
+    instagram.use({
+      client_id: cid,
+      client_secret: clsec
+    });
+
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
 };
