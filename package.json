@@ -1,21 +1,21 @@
 {
-  "name": "WebDevelopment",
+  "name": "web_development",
   "version": "0.0.0",
   "description": "To install the packages run.",
   "main": "server.js",
   "dependencies": {
     "account": "~1.0.0",
-    "connect-redis": "~2.5.1",
-    "connect-mongo": "~0.8.2",
+    "connect-mongo": "^0.8.2",
+    "connect-redis": "^2.5.1",
+    "cookie-parser": "^1.4.0",
     "ejs": "~2.3.4",
-    "cookie-parser": "~1.4.0",
-    "express": "~4.13.3",
-    "express-handlebars": "~2.0.1",
-    "express-session": "~1.11.3",
-    "handlebars": "~4.0.3",
-    "instagram-node": "~0.5.8",
+    "express": "^4.13.3",
+    "express-handlebars": "^2.0.1",
+    "express-session": "^1.11.3",
+    "handlebars": "^4.0.4",
+    "instagram-node": "^0.5.8",
     "nodemon": "~1.7.1",
-    "url": "~0.11.0"
+    "url": "^0.11.0"
   },
   "devDependencies": {},
   "scripts": {
@@ -24,11 +24,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/elenberg/WebDevelopment.git"
+    "url": "git+https://github.com/elenberg/WebDevelopment.git"
   },
   "author": "",
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/elenberg/WebDevelopment/issues"
-  }
+  },
+  "homepage": "https://github.com/elenberg/WebDevelopment#readme"
 }

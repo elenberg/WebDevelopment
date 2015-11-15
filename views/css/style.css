@@ -243,3 +243,56 @@ font-size: 17px;
 .box:hover .back{
 	transform: perspective( 600px ) rotateY( 0deg );
 }
+
+.button {
+	-moz-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+	box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+	background-color:#9dce2c;
+	-webkit-border-top-left-radius:9px;
+	-moz-border-radius-topleft:9px;
+	border-top-left-radius:9px;
+	-webkit-border-top-right-radius:9px;
+	-moz-border-radius-topright:9px;
+	border-top-right-radius:9px;
+	-webkit-border-bottom-right-radius:9px;
+	-moz-border-radius-bottomright:9px;
+	border-bottom-right-radius:9px;
+	-webkit-border-bottom-left-radius:9px;
+	-moz-border-radius-bottomleft:9px;
+	border-bottom-left-radius:9px;
+	text-indent:0;
+	border:1px solid #83c41a;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:15px;
+	font-weight:normal;
+	font-style:normal;
+	height:55px;
+	line-height:45px;
+	width:200px;
+	text-decoration:none;
+	text-align:center;
+	position: fixed;
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 50%;
+}
+
+.button:hover {
+	background-color:#8cb82b;
+}
+
+.button:active {
+	postion:inherit;
+}
+
+.fluff {
+	text-align: center;
+	position:fixed;
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 30%;
+	font-size: 20px;
+}

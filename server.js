@@ -95,30 +95,17 @@ function dashboard(req, res) {
 
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
-
 };
 
 function welcome(req, res) {
-
-  if (req.session.instaToken){
-    instagram.use({
-      client_id: cid,
-      client_secret: clsec
-    });
-    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
-  }
-
-  else {
-    instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-      res.render('welcome', {
-        layout:'base',
-        gram: medias,
-        title: req.session.username
-      })
+    res.render('welcome', {
+      layout: 'welcomeLayout'
     })
-  }
-
 };
+
+function redi(req, res) {
+  res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+}
 
 function profile(req, res) {
 
@@ -138,14 +125,15 @@ function profile(req, res) {
 
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
-
 };
 
 function search(req, res) {
 
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-      res.render('public/pages/index.ejs', {gram: medias });//Add your function here
+      res.render('public/pages/index.ejs',
+        { gram: medias }
+      );//Add your function here
     });
   }
 
@@ -161,6 +149,7 @@ function search(req, res) {
 };
 //All Routes here.
 app.get('/', welcome);
+app.get('/redirect', redi);
 app.get('/dashboard', dashboard);
 //app.get('/', login); This needs to replace line 56
 app.get('/profile', profile);
