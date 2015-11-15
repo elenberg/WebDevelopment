@@ -85,33 +85,7 @@ function dashboard(req, res) {
 };
 
 function welcome(req, res) {
-<<<<<<< HEAD
-    res.render('welcome', {
-      layout: 'welcomeLayout'
-=======
-
-  if (req.session.instaToken){
-    //Since they have the token, that means they are authenticated so we redirect them to the dashboard.
-    res.redirect(homepage_uri);
-  }
-
-  else {
-    //Need to use a different layout instead of base. That way they don't have all of the menu available.
-    instagram.use({
-      client_id: cid,
-      client_secret: clsec
-    });
-    console.log(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
-    instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-      res.render('welcome', {
-        layout:'base',
-        gram: medias,
-        //Use link to redirect the user.
-        link:instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }),
-        title: req.session.username
-      })
->>>>>>> origin/develop
-    })
+  res.render('welcome')
 };
 
 function redi(req, res) {
