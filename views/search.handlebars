@@ -1,1 +1,14 @@
-<h1>Search page</h1>
+<div class="search">
+  <div class="currentSearches">
+    <div class="searchLabel"> Search Hashtags </div>
+    <input class="searchInput" type="text" name="searchInputText" placeholder="#hashtag" />
+  </div>
+  <div class="toggleSavedSearches savedSearches">
+    <button class="visible">Toggle Pins</button>
+    <!-- <li class="pinned-search-items" id="pinnedSearchItems"></li> -->
+  </div>
+</div>
+
+<div class="gram">
+  {{> feed}}
+</div>

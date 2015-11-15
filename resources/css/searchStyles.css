@@ -167,7 +167,7 @@ h1, h2, h3, h4, h5, h6 {
     .search-box:nth-child(n) {
       margin: 5px 0 0 7px;
     }
-    .search-box:nth-child(14n) {
+    .search-box:nth-child(12n) {
       margin: 5px 0 15px 7px;
     }
 

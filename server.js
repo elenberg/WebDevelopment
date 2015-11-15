@@ -111,11 +111,13 @@ function search(req, res) {
 
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-      res.render('public/pages/index.ejs',
-        { gram: medias }
-      );//Add your function here
-      res.render('search', {gram: medias });//Add your function here
-    });
+      res.render('search', {
+        layout:'base',
+        searchResults: medias,
+        gram: medias,
+        title: req.session.username
+      })
+    })
   }
 
   else {
