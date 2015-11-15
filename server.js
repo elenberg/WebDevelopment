@@ -98,20 +98,24 @@ function dashboard(req, res) {
 
 };
 
-function login(req, res) {
+function welcome(req, res) {
 
-  if(req.session.instaToken) {
-    instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-      res.render('public/pages/index.ejs', {gram: medias });//Add your function here
-    });
-  }
-
-  else {
+  if (req.session.instaToken){
     instagram.use({
       client_id: cid,
       client_secret: clsec
     });
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+  }
+
+  else {
+    instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
+      res.render('welcome', {
+        layout:'base',
+        gram: medias,
+        title: req.session.username
+      })
+    })
   }
 
 };
@@ -156,7 +160,7 @@ function search(req, res) {
 
 };
 //All Routes here.
-app.get('/', auth);
+app.get('/', welcome);
 app.get('/dashboard', dashboard);
 //app.get('/', login); This needs to replace line 56
 app.get('/profile', profile);
