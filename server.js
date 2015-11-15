@@ -85,7 +85,7 @@ function dashboard(req, res) {
 };
 
 function welcome(req, res) {
-  res.render('welcome')
+  res.render('welcome', {layout: 'welcomeLayout'});
 };
 
 function redi(req, res) {
@@ -102,27 +102,18 @@ function profile(req, res) {
 
   else {
     welcome(req,res);
-
-<<<<<<< HEAD
     res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
-=======
-}
-
->>>>>>> origin/develop
 };
 
 function search(req, res) {
 
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-<<<<<<< HEAD
       res.render('public/pages/index.ejs',
         { gram: medias }
       );//Add your function here
-=======
       res.render('search', {gram: medias });//Add your function here
->>>>>>> origin/develop
     });
   }
 
