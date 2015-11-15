@@ -53,13 +53,16 @@ exports.handleauth = function(req, res) {
       req.session.full_name = result.user.full_name;
       req.session.profile_picture = result.user.profile_picture;
       console.log('Yay lets use ' + req.session.user_id);
+      req.session.save()
       res.redirect(homepage_uri);
     }
   });
 
 };
 function logout(req,res){
-  req.session = undefined;
+  req.session.destroy(function(err) {
+  // cannot access session here
+})
   welcome(req,res);
 };
 app.get('/handleauth', exports.handleauth);
@@ -111,6 +114,7 @@ function search(req, res) {
 
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
+
       res.render('search', {
         layout:'base',
         searchResults: medias,
@@ -132,8 +136,12 @@ app.get('/dashboard', dashboard);
 app.get('/profile', profile);
 app.get('/search', search);
 app.get('/logout', logout);
+app.get('', welcome);
 
 
+app.use(function(req, res, next) {
+  welcome(req,res);
+});
 app.listen(8080, function(err) {
   if(err){
     console.log("Error");
