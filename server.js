@@ -59,19 +59,6 @@ exports.handleauth = function(req, res) {
 
 };
 
-function auth(req, res) {
-  console.log("Received new request for homepage");
-
-  if(req.session.instaToken === undefined) {
-    console.log('If undefinded redirect token = ' + req.session.instaToken + ' ');
-    res.redirect(homepage_uri);
-  }
-
-  else {
-    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
-  }
-};
-
 app.get('/handleauth', exports.handleauth);
 
 
@@ -101,18 +88,23 @@ function dashboard(req, res) {
 function welcome(req, res) {
 
   if (req.session.instaToken){
+    //Since they have the token, that means they are authenticated so we redirect them to the dashboard.
+    res.redirect(homepage_uri);
+  }
+
+  else {
+    //Need to use a different layout instead of base. That way they don't have all of the menu available.
     instagram.use({
       client_id: cid,
       client_secret: clsec
     });
-    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
-  }
-
-  else {
+    console.log(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
       res.render('welcome', {
         layout:'base',
         gram: medias,
+        //Use link to redirect the user.
+        link:instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }),
         title: req.session.username
       })
     })
@@ -124,20 +116,14 @@ function profile(req, res) {
 
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-        res.render('public/pages/index.ejs', {gram: medias });//Add your function here
+        res.render('profile', {profile_picture: req.session.profile_picture });//Add your function here
     });
   }
 
   else {
-    //console.log('In else statement of dashboard\n' + req.cookies.name + ' Including cookies. Testing.');
-    //For some reason it isn't grabbing the instagram.use from line 27. Not sure why.
-    instagram.use({
-      client_id: cid,
-      client_secret: clsec
-    });
+    welcome(req,res);
 
-    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
-  }
+}
 
 };
 
@@ -145,17 +131,12 @@ function search(req, res) {
 
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-      res.render('public/pages/index.ejs', {gram: medias });//Add your function here
+      res.render('search', {gram: medias });//Add your function here
     });
   }
 
   else {
-    instagram.use({
-      client_id: cid,
-      client_secret: clsec
-    });
-
-    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+    welcome(req,res);
   }
 
 };
