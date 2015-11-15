@@ -58,7 +58,10 @@ exports.handleauth = function(req, res) {
   });
 
 };
-
+function logout(req,res){
+  req.session = undefined;
+  welcome(req,res);
+};
 app.get('/handleauth', exports.handleauth);
 
 
@@ -75,12 +78,7 @@ function dashboard(req, res) {
   }
 
   else {
-    instagram.use({
-      client_id: cid,
-      client_secret: clsec
-    });
-
-    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+    welcome(req, res)
   }
 };
 
@@ -89,6 +87,10 @@ function welcome(req, res) {
 };
 
 function redi(req, res) {
+  instagram.use({
+    client_id: cid,
+    client_secret: clsec
+  });
   res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
 }
 
@@ -102,7 +104,6 @@ function profile(req, res) {
 
   else {
     welcome(req,res);
-    res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
   }
 };
 
@@ -126,9 +127,9 @@ function search(req, res) {
 app.get('/', welcome);
 app.get('/redirect', redi);
 app.get('/dashboard', dashboard);
-//app.get('/', login); This needs to replace line 56
 app.get('/profile', profile);
 app.get('/search', search);
+app.get('/logout', logout);
 
 
 app.listen(8080, function(err) {
