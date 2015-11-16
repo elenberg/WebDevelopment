@@ -63,7 +63,7 @@ function logout(req,res){
   req.session.destroy(function(err) {
   // cannot access session here
 })
-  welcome(req,res);
+  welcome(req, res);
 };
 app.get('/handleauth', exports.handleauth);
 
@@ -81,21 +81,20 @@ function dashboard(req, res) {
   }
 
   else {
-    welcome(req, res)
+    res.redirect("/");
   }
 };
 
 function welcome(req, res) {
-  res.render('welcome', {layout: 'welcomeLayout'});
-};
 
-function redi(req, res) {
-  instagram.use({
-    client_id: cid,
-    client_secret: clsec
-  });
-  res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
-}
+  if (req.session.instaToken) {
+    res.redirect("/dashboard");
+  }
+
+  else {
+    res.render('welcome', {layout: 'welcomeLayout'});
+  }
+};
 
 function profile(req, res) {
 
@@ -106,7 +105,7 @@ function profile(req, res) {
   }
 
   else {
-    welcome(req,res);
+    res.redirect("/");
   }
 };
 
@@ -125,13 +124,12 @@ function search(req, res) {
   }
 
   else {
-    welcome(req,res);
+    res.redirect("/");
   }
 
 };
 //All Routes here.
 app.get('/', welcome);
-app.get('/redirect', redi);
 app.get('/dashboard', dashboard);
 app.get('/profile', profile);
 app.get('/search', search);
