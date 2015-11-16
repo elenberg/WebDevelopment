@@ -1,15 +1,21 @@
 var express = require('express');
-var url = require('url');
-var app = express();
-var http = require('http');
 var exphbs = require('express-handlebars');
-var instagram = require('instagram-node').instagram();
+var url = require('url');
+var http = require('http');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var instagram = require('instagram-node').instagram();
+
+// Global Variables //
+var app = express();
 
 var cid = 'f81f407862d44b03a130dfb1c020c5ff'
 var clsec = 'd337b5c6f52f4b3a8270d83c2d88ef18'
 
+var redirect_uri = 'http://localhost:8080/handleauth';
+var homepage_uri = 'http://localhost:8080/dashboard';
+
+// Element Initializations //
 app.engine('handlebars', exphbs({defaultLayout: 'base'}));
 app.set('view engine', 'handlebars');
 
@@ -33,16 +39,14 @@ instagram.use({
   client_secret: clsec
 });
 
-var redirect_uri = 'http://localhost:8080/handleauth';
-var homepage_uri = 'http://localhost:8080/dashboard';
-
-//Handles Authentication //
+// Handles Authentication //
 exports.handleauth = function(req, res) {
   instagram.authorize_user(req.query.code, redirect_uri, function(err, result) {
     if (err) {
       console.log(err.body);
       res.send("It looks like the credentials weren't valid.");
     }
+
     else {
       instagram.use({access_token: result.access_token});
       req.session.instaToken = result.access_token;
@@ -68,7 +72,7 @@ exports.handleauth = function(req, res) {
 
 };
 
-// Page display functions //
+// Page Display Functions //
 function welcome(req, res) {
   if (req.session.instaToken) {
     res.redirect("/dashboard");
@@ -131,7 +135,7 @@ function search(req, res) {
   }
 };
 
-// Page action functions //
+// Page Action Functions //
 function redirAPI(req, res) {
   instagram.use({
     client_id: cid,
