@@ -55,7 +55,8 @@ exports.handleauth = function(req, res) {
       if(req.session.previous_page == undefined){
       res.redirect("/dashboard");
       }
-      else{
+
+      else {
         var page = req.session.previous_page
         req.session.previous_page = undefined;
         req.session.save();
