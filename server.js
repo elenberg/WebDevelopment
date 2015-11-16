@@ -65,17 +65,6 @@ exports.handleauth = function(req, res) {
   });
 
 };
-<<<<<<< HEAD
-=======
-function logout(req,res){
-  req.session.destroy(function(err) {
-  // cannot access session here
-})
-  res.redirect('/');
-
-};
-app.get('/handleauth', exports.handleauth);
->>>>>>> origin/develop
 
 // Page display functions //
 function welcome(req, res) {
@@ -106,20 +95,6 @@ function dashboard(req, res) {
   }
 };
 
-<<<<<<< HEAD
-=======
-function welcome(req, res) {
-
-  if (req.session.instaToken == undefined) {
-    res.render('welcome', {layout: 'welcomeLayout'});
-  }
-
-  else {
-    res.redirect('/dashboard')
-  }
-};
-
->>>>>>> origin/develop
 function profile(req, res) {
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
@@ -179,11 +154,7 @@ app.get('/handleauth', exports.handleauth);
 
 // Invalid URL Handling //
 app.use(function(req, res, next) {
-<<<<<<< HEAD
   res.redirect("/");
-=======
-  res.redirect('/');
->>>>>>> origin/develop
 });
 
 // Server Execution //
