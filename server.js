@@ -141,6 +141,7 @@ function redirAPI(req, res) {
     client_id: cid,
     client_secret: clsec
   });
+
   res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
 }
 
