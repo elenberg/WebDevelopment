@@ -19,12 +19,12 @@ app.use(cookieParser());
 app.use(session({
   cookieName: 'session',
   secret: 'eg[isfd-8yF9-7w2315df{}+Ijsli;;to8',
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
+  duration: 300 * 600 * 10000,
+  activeDuration: 50 * 600 * 10000,
   httpOnly: true,
   secure: true,
   ephemeral: true,
-  resave: false,
+  resave: true,
   saveUninitialized: true
 }));
 
@@ -41,35 +41,54 @@ exports.handleauth = function(req, res) {
   instagram.authorize_user(req.query.code, redirect_uri, function(err, result) {
     if (err) {
       console.log(err.body);
-      res.send("Didn't work");
+      res.send("It looks like the credentials weren't valid.");
     }
-
     else {
-      console.log('Yay! Access token is ' + result.access_token + ' And more information' + result.user.id);
       instagram.use({access_token: result.access_token});
       req.session.instaToken = result.access_token;
       req.session.user_id = result.user.id;
       req.session.username = result.user.username;
       req.session.full_name = result.user.full_name;
       req.session.profile_picture = result.user.profile_picture;
-      console.log('Yay lets use ' + req.session.user_id);
       req.session.save()
-      res.redirect(homepage_uri);
+      console.log(req.session.previous_page);
+      if(req.session.previous_page == undefined){
+      res.redirect("/dashboard");
+      }
+      else{
+        var page = req.session.previous_page
+        req.session.previous_page = undefined;
+        req.session.save();
+        res.redirect(page);
+      }
     }
   });
 
 };
+<<<<<<< HEAD
+=======
 function logout(req,res){
   req.session.destroy(function(err) {
   // cannot access session here
 })
-  welcome(req, res);
+  res.redirect('/');
+
 };
 app.get('/handleauth', exports.handleauth);
+>>>>>>> origin/develop
 
+// Page display functions //
+function welcome(req, res) {
+  if (req.session.instaToken) {
+    res.redirect("/dashboard");
+  }
+
+  else {
+    res.render('welcome', {layout: 'welcomeLayout'});
+  }
+};
 
 function dashboard(req, res) {
-
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
       res.render('dashboard', {
@@ -81,23 +100,27 @@ function dashboard(req, res) {
   }
 
   else {
-    res.redirect("/");
+    res.redirect('/');
+    req.session.previous_page = '/dashboard';
+    req.session.save();
   }
 };
 
+<<<<<<< HEAD
+=======
 function welcome(req, res) {
 
-  if (req.session.instaToken) {
-    res.redirect("/dashboard");
+  if (req.session.instaToken == undefined) {
+    res.render('welcome', {layout: 'welcomeLayout'});
   }
 
   else {
-    res.render('welcome', {layout: 'welcomeLayout'});
+    res.redirect('/dashboard')
   }
 };
 
+>>>>>>> origin/develop
 function profile(req, res) {
-
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
         res.render('profile', {profile_picture: req.session.profile_picture });//Add your function here
@@ -105,15 +128,15 @@ function profile(req, res) {
   }
 
   else {
-    res.redirect("/");
+    req.session.previous_page = '/profile';
+    req.session.save();
+    res.redirect('/');
   }
 };
 
 function search(req, res) {
-
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-
       res.render('search', {
         layout:'base',
         searchResults: medias,
@@ -124,32 +147,52 @@ function search(req, res) {
   }
 
   else {
-    res.redirect("/");
+    req.session.previous_page = '/search';
+    req.session.save();
+    res.redirect('/');
+
   }
 };
 
+// Page action functions //
 function redirAPI(req, res) {
+  instagram.use({
+    client_id: cid,
+    client_secret: clsec
+  });
   res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
 }
-//All Routes here.
+
+function logout(req, res) {
+  req.session.destroy(function(err) {/* cannot access session here */})
+  res.redirect("/");
+};
+
+// Page Routes //
 app.get('/', welcome);
 app.get('/redirect', redirAPI);
 app.get('/dashboard', dashboard);
 app.get('/profile', profile);
 app.get('/search', search);
 app.get('/logout', logout);
+app.get('/handleauth', exports.handleauth);
 
-
+// Invalid URL Handling //
 app.use(function(req, res, next) {
-  welcome(req,res);
+<<<<<<< HEAD
+  res.redirect("/");
+=======
+  res.redirect('/');
+>>>>>>> origin/develop
 });
 
+// Server Execution //
 app.listen(8080, function(err) {
-  if(err){
+  if(err) {
     console.log("Error");
   }
-  else{
+
+  else {
     console.log("Listening on port 8080");
   }
-
 });
