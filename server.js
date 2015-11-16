@@ -39,7 +39,7 @@ instagram.use({
   client_secret: clsec
 });
 
-// Handles Authentication //
+// Authentication Handling //
 exports.handleauth = function(req, res) {
   instagram.authorize_user(req.query.code, redirect_uri, function(err, result) {
     if (err) {
@@ -163,7 +163,7 @@ app.use(function(req, res, next) {
   res.redirect("/");
 });
 
-// Server Execution //
+// Server Handling //
 app.listen(8080, function(err) {
   if(err) {
     console.log("Error");
