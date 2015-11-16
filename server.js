@@ -19,12 +19,12 @@ app.use(cookieParser());
 app.use(session({
   cookieName: 'session',
   secret: 'eg[isfd-8yF9-7w2315df{}+Ijsli;;to8',
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
+  duration: 300 * 600 * 10000,
+  activeDuration: 50 * 600 * 10000,
   httpOnly: true,
   secure: true,
   ephemeral: true,
-  resave: false,
+  resave: true,
   saveUninitialized: true
 }));
 
@@ -41,7 +41,7 @@ exports.handleauth = function(req, res) {
   instagram.authorize_user(req.query.code, redirect_uri, function(err, result) {
     if (err) {
       console.log(err.body);
-      res.send("Didn't work");
+      res.send("It looks like the credentials weren't valid.");
     }
     else {
       instagram.use({access_token: result.access_token});
@@ -51,7 +51,16 @@ exports.handleauth = function(req, res) {
       req.session.full_name = result.user.full_name;
       req.session.profile_picture = result.user.profile_picture;
       req.session.save()
-      res.redirect(homepage_uri);
+      console.log(req.session.previous_page);
+      if(req.session.previous_page == undefined){
+      res.redirect("/dashboard");
+      }
+      else{
+        var page = req.session.previous_page
+        req.session.previous_page = undefined;
+        req.session.save();
+        res.redirect(page);
+      }
     }
   });
 
@@ -80,7 +89,8 @@ function dashboard(req, res) {
 
   else {
     res.redirect('/');
-
+    req.session.previous_page = '/dashboard';
+    req.session.save();
   }
 };
 
@@ -91,7 +101,7 @@ function welcome(req, res) {
   }
 
   else {
-    res.redirect("/dashboard");
+    res.redirect('/dashboard')
   }
 };
 
@@ -104,6 +114,8 @@ function profile(req, res) {
   }
 
   else {
+    req.session.previous_page = '/profile';
+    req.session.save();
     res.redirect('/');
   }
 };
@@ -123,6 +135,8 @@ function search(req, res) {
   }
 
   else {
+    req.session.previous_page = '/search';
+    req.session.save();
     res.redirect('/');
 
   }
