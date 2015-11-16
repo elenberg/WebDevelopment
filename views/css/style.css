@@ -86,6 +86,7 @@ body{
   width: 80%;
   float: left;
 }
+
   .box img {
     left:0;
     right:0;
@@ -327,60 +328,110 @@ body{
   user-select: none;
 }
 
+  .error {
+    border: 2px solid red;
+  }
+
 /*------------------------------------*\
             Search Display
 \*------------------------------------*/
 .search {
-  position: absolute;
-  left: 50%;
-  margin:0 0 10px -40%;
-  width: 80%;
+  position: relative;
+  width: 70%;
+  left: 25%;
   float: left;
 }
 
-.searchLabel {
+.searchLabels {
+  width: 150px;
   margin: 15px 0 5px 15px;
   line-height: 15px;
   text-align: left;
 }
 
-.searchInput {
+.currentSearches input {
+  position: relative;
   border: none;
   width: 260px;
-  padding: 5px;
+  padding: 10px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  float: left;
+  margin: 10px 0 10px 10px;
 }
 
-.toggleSavedSearches{
-  margin: 10px 0 0 15px;
-  padding: 5px;
-  width: 130px;
-  border: solid  1px #BBB;
+.currentSearches button {
   border-radius: 5px;
-  background-color: #EEE;
+  background: #FFF;
+  border: solid 1px #CCC;
+  height: 35px;
+  text-align: center;
+  width: 100px;
+  margin: 10px 0 10px 0px;
+}
+
+.currentSearches button:hover {
+  border: solid 2px #DDD;
+  background-color: #DDD;
+  -webkit-transition: border 500ms;
+  -moz-transition: border 500ms;
+  -o-transition: border 500ms;
+  transition: border 500ms;
+  -webkit-transition: background-color 500ms;
+  -moz-transition: background-color 500ms;
+  -o-transition: background-color 500ms;
+  transition: background-color 500ms;
 }
 
 /*------------------------------------*\
           saved-searches
 \*------------------------------------*/
+
+.toggleSavedSearches button {
+  border-radius: 5px;
+  background: #FFF;
+  border: solid 1px #CCC;
+  height: 35px;
+  text-align: center;
+  width: 180px;
+  float: left;
+  margin: 10px 550px 10px 10px;
+}
+
+.toggleSavedSearches button:hover {
+  border: solid 2px #DDD;
+  background-color: #DDD;
+  -webkit-transition: border 500ms;
+  -moz-transition: border 500ms;
+  -o-transition: border 500ms;
+  transition: border 500ms;
+  -webkit-transition: background-color 500ms;
+  -moz-transition: background-color 500ms;
+  -o-transition: background-color 500ms;
+  transition: background-color 500ms;
+  margin: 10px 550px 10px 10px;
+}
+
 .savedSearches {
-  width: 100%;
+  width: 50%;
   margin: 15px 0 15px 0;
 }
 
   .savedSearches ul li {
     float: left;
-    margin: 0;
+    margin: 10px;
+    margin: 15px 0 15px 0;
   }
 
-  .savedSearches a {
-    border-radius: 0 10px 10px 0;
-    max-width: 300px;
-    border: solid 2px #CCC;
-    background-color: #CCC;
-    float: left;
-    padding: 5px;
-    margin: 5px 5px 5px 0;
-  }
+    .savedSearches a {
+      border-radius: 0 10px 10px 0;
+      max-width: 300px;
+      border: solid 2px #CCC;
+      background-color: #CCC;
+      float: left;
+      padding: 4px;
+      margin: 5px 5px 15px 0;
+    }
 
   .savedSearches a:hover {
       border: solid 2px #DDD;
@@ -393,6 +444,8 @@ body{
       -moz-transition: background-color 500ms;
       -o-transition: background-color 500ms;
       transition: background-color 500ms;
+      margin: 5px 5px 15px 0;
+      float: left;
   }
 
   .savedSearches button {
@@ -405,7 +458,8 @@ body{
       width: 25px;
       text-align: center;
       vertical-align:middle;
-      margin: 5px 0 5px 5px;
+      margin: 5px 0 15px 5px;
+      float: left;
   }
 
   .savedSearches button:hover {
@@ -419,65 +473,6 @@ body{
       -moz-transition: background-color 500ms;
       -o-transition: background-color 500ms;
       transition: background-color 500ms;
-  }
-
-/*------------------------------------*\
-            Search Filters
-\*------------------------------------*/
-.searchFilters {
-  margin: 15px 0 0 0;
-}
-
-  .searchFilters ul li {
-    float: left;
-    margin: 3px;
-  }
-
-  .searchFilters a {
-    border-radius: 0 5px 5px 0;
-    max-width: 300px;
-    border: solid 2px #CCC;
-    background-color: #CCC;
-    float: left;
-    padding: 5px;
-    margin: 5px 0 0 0;
-  }
-
-  .searchFilters a:hover {
-      border: solid 2px #DDD;
-      background-color: #DDD;
-      -webkit-transition: border 500ms;
-      -moz-transition: border 500ms;
-      -o-transition: border 500ms;
-      transition: border 500ms;
-      -webkit-transition: background-color 500ms;
-      -moz-transition: background-color 500ms;
-      -o-transition: background-color 500ms;
-      transition: background-color 500ms;
-  }
-
-  .searchFilters button {
-      border-radius: 5px 0 0 5px;
-      background-color: #CCC;
-      max-width: 20%;
-      border: solid 2px #CCC;
+      margin: 5px 0 15px 5px;
       float: left;
-      height: 32px;
-      width: 25px;
-      text-align: center;
-      vertical-align:middle;
-      margin: 5px 0 0 0;
-  }
-
-  .searchFilters button:hover {
-      border: solid 2px #DDD;
-      background-color: #DDD;
-      -webkit-transition: border 500ms;
-      -moz-transition: border 500ms;
-      -o-transition: border 500ms;
-      transition: border 500ms;
-      -webkit-transition: background-color 500ms;
-      -moz-transition: background-color 500ms;
-      -o-transition: background-color 500ms;
-      transition: background-color 500ms;
   }

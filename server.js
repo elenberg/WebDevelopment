@@ -40,6 +40,11 @@ instagram.use({
 });
 
 // Authentication Handling //
+var redirect_uri = 'http://localhost:8080/handleauth';
+var homepage_uri = 'http://localhost:8080/dashboard';
+var igResults = {};
+
+//Handles Authentication //
 exports.handleauth = function(req, res) {
   instagram.authorize_user(req.query.code, redirect_uri, function(err, result) {
     if (err) {
@@ -54,7 +59,7 @@ exports.handleauth = function(req, res) {
       req.session.username = result.user.username;
       req.session.full_name = result.user.full_name;
       req.session.profile_picture = result.user.profile_picture;
-      req.session.save()
+      req.session.save();
       console.log(req.session.previous_page);
 
       if(req.session.previous_page == undefined){
@@ -69,7 +74,6 @@ exports.handleauth = function(req, res) {
       }
     }
   });
-
 };
 
 // Page Display Functions //
@@ -120,26 +124,42 @@ function profile(req, res) {
 };
 
 function search(req, res) {
-  if(req.session.instaToken) {
-    instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-      res.render('search', {
-        layout:'base',
-        searchResults: medias,
-        gram: medias,
-        title: req.session.username
+  if(req.session.instaToken)
+  {
+    if (req.params.tags)
+    {
+      instagram.tag_media_recent(req.params.tags, function(err, medias, pagination, remaining, limit) {
+      res.render('search',
+          {
+            layout: 'base',
+            gram: medias,
+            title: req.session.username
+          })
       })
-    })
+    }
+    else
+    {
+      instagram.media_popular(function(err, medias, remaining, limit) {
+      res.render('search',
+          {
+            layout: 'base',
+            gram: medias,
+            title: req.session.username
+          })
+      })
+    }
+
   }
 
-  else {
+  else
+  {
     req.session.previous_page = '/search';
     req.session.save();
     res.redirect('/');
-
   }
 };
 
-// Page Action Functions //
+// Page action functions //
 function redirAPI(req, res) {
   instagram.use({
     client_id: cid,
@@ -147,7 +167,7 @@ function redirAPI(req, res) {
   });
 
   res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
-}
+};
 
 function logout(req, res) {
   req.session.destroy(function(err) {/* cannot access session here */})
@@ -155,11 +175,14 @@ function logout(req, res) {
 };
 
 // Page Routes //
+//All Routes here.
 app.get('/', welcome);
 app.get('/redirect', redirAPI);
 app.get('/dashboard', dashboard);
 app.get('/profile', profile);
 app.get('/search', search);
+app.get('/search%', search);
+app.get('/search%:tags', search);
 app.get('/logout', logout);
 app.get('/handleauth', exports.handleauth);
 
@@ -178,3 +201,4 @@ app.listen(8080, function(err) {
     console.log("Listening on port 8080");
   }
 });
+

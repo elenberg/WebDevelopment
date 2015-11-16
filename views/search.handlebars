@@ -1,11 +1,19 @@
+
+<script src="views/public/search.js"></script>
+
 <div class="search">
-  <div class="currentSearches">
-    <div class="searchLabel"> Search Hashtags </div>
-    <input class="searchInput" type="text" name="searchInputText" placeholder="#hashtag" />
+  <div class="searchLabels">
+    <div>Search Hashtags </div>
   </div>
-  <div class="toggleSavedSearches savedSearches">
-    <button class="visible">Toggle Pins</button>
-    <!-- <li class="pinned-search-items" id="pinnedSearchItems"></li> -->
+  <div class="currentSearches">
+    <input class="searchInput" type="text" placeholder="yourHastagHere" autofocus/>
+    <button class="searchSubmit"> Search </button>
+  </div>
+  <div class="toggleSavedSearches">
+    <button>Toggle Saved Searches</button>
+  </div>
+  <div class="savedSearches">
+    {{> searchFilter}}
   </div>
 </div>
 
