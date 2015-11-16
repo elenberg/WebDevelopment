@@ -126,20 +126,24 @@ function search(req, res) {
   else {
     res.redirect("/");
   }
-
 };
+
+function redirAPI(req, res) {
+  res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+}
 //All Routes here.
 app.get('/', welcome);
+app.get('/redirect', redirAPI);
 app.get('/dashboard', dashboard);
 app.get('/profile', profile);
 app.get('/search', search);
 app.get('/logout', logout);
-app.get('', welcome);
 
 
 app.use(function(req, res, next) {
   welcome(req,res);
 });
+
 app.listen(8080, function(err) {
   if(err){
     console.log("Error");
