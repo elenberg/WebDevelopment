@@ -9,8 +9,8 @@ var instagram = require('instagram-node').instagram();
 // Global Variables //
 var app = express();
 
-var cid = 'f81f407862d44b03a130dfb1c020c5ff'
-var clsec = 'd337b5c6f52f4b3a8270d83c2d88ef18'
+var cid = 'f81f407862d44b03a130dfb1c020c5ff';
+var clsec = 'd337b5c6f52f4b3a8270d83c2d88ef18';
 
 var redirect_uri = 'http://localhost:8080/handleauth';
 var homepage_uri = 'http://localhost:8080/dashboard';
@@ -23,7 +23,6 @@ app.use(express.static(__dirname));
 app.use(cookieParser());
 
 app.use(session({
-  cookieName: 'session',
   secret: 'eg[isfd-8yF9-7w2315df{}+Ijsli;;to8',
   duration: 300 * 600 * 10000,
   activeDuration: 50 * 600 * 10000,
@@ -49,7 +48,7 @@ exports.handleauth = function(req, res) {
   instagram.authorize_user(req.query.code, redirect_uri, function(err, result) {
     if (err) {
       console.log(err.body);
-      res.send("It looks like the credentials weren't valid.");
+      res.redirect("/");
     }
 
     else {
@@ -67,7 +66,7 @@ exports.handleauth = function(req, res) {
       }
 
       else {
-        var page = req.session.previous_page
+        var page = req.session.previous_page;
         req.session.previous_page = undefined;
         req.session.save();
         res.redirect(page);
@@ -83,12 +82,14 @@ function welcome(req, res) {
   }
 
   else {
+    console.log(req.session.previous_page);
     res.render('welcome', {layout: 'welcomeLayout'});
   }
 };
 
 function dashboard(req, res) {
   if(req.session.instaToken) {
+    req.session.loggedIn = true;
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
       res.render('dashboard', {
         layout:'base',
@@ -99,9 +100,9 @@ function dashboard(req, res) {
   }
 
   else {
-    res.redirect('/');
     req.session.previous_page = '/dashboard';
     req.session.save();
+    res.redirect('/');
   }
 };
 
@@ -169,8 +170,10 @@ function redirAPI(req, res) {
   res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
 };
 
+// EVERETT: The session IS being destroyed (otherwise it would immediately redirect to '/dashboard' when this function
+// comnpletes), however the connection to the instagram server is NOT and it is immediately recreated. No idea why.
 function logout(req, res) {
-  req.session.destroy(function(err) {/* cannot access session here */})
+  req.session.destroy();
   res.redirect("/");
 };
 
@@ -189,6 +192,7 @@ app.get('/handleauth', exports.handleauth);
 // Invalid URL Handling //
 app.use(function(req, res, next) {
   res.redirect("/");
+  next();
 });
 
 // Server Handling //
