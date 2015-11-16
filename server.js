@@ -43,16 +43,13 @@ exports.handleauth = function(req, res) {
       console.log(err.body);
       res.send("Didn't work");
     }
-
     else {
-      console.log('Yay! Access token is ' + result.access_token + ' And more information' + result.user.id);
       instagram.use({access_token: result.access_token});
       req.session.instaToken = result.access_token;
       req.session.user_id = result.user.id;
       req.session.username = result.user.username;
       req.session.full_name = result.user.full_name;
       req.session.profile_picture = result.user.profile_picture;
-      console.log('Yay lets use ' + req.session.user_id);
       req.session.save()
       res.redirect(homepage_uri);
     }
@@ -63,7 +60,8 @@ function logout(req,res){
   req.session.destroy(function(err) {
   // cannot access session here
 })
-  welcome(req, res);
+  res.redirect('/');
+
 };
 app.get('/handleauth', exports.handleauth);
 
@@ -81,18 +79,19 @@ function dashboard(req, res) {
   }
 
   else {
-    res.redirect("/");
+    res.redirect('/');
+
   }
 };
 
 function welcome(req, res) {
 
-  if (req.session.instaToken) {
-    res.redirect("/dashboard");
+  if (req.session.instaToken == undefined) {
+    res.render('welcome', {layout: 'welcomeLayout'});
   }
 
   else {
-    res.render('welcome', {layout: 'welcomeLayout'});
+    res.redirect("/dashboard");
   }
 };
 
@@ -105,7 +104,7 @@ function profile(req, res) {
   }
 
   else {
-    res.redirect("/");
+    res.redirect('/');
   }
 };
 
@@ -124,11 +123,16 @@ function search(req, res) {
   }
 
   else {
-    res.redirect("/");
+    res.redirect('/');
+
   }
 };
 
 function redirAPI(req, res) {
+  instagram.use({
+    client_id: cid,
+    client_secret: clsec
+  });
   res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
 }
 //All Routes here.
@@ -141,7 +145,7 @@ app.get('/logout', logout);
 
 
 app.use(function(req, res, next) {
-  welcome(req,res);
+  res.redirect('/');
 });
 
 app.listen(8080, function(err) {
