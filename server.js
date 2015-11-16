@@ -36,7 +36,7 @@ instagram.use({
 var redirect_uri = 'http://localhost:8080/handleauth';
 var homepage_uri = 'http://localhost:8080/dashboard';
 
-//Handles authentication.
+//Handles Authentication //
 exports.handleauth = function(req, res) {
   instagram.authorize_user(req.query.code, redirect_uri, function(err, result) {
     if (err) {
@@ -52,8 +52,9 @@ exports.handleauth = function(req, res) {
       req.session.profile_picture = result.user.profile_picture;
       req.session.save()
       console.log(req.session.previous_page);
+
       if(req.session.previous_page == undefined){
-      res.redirect("/dashboard");
+        res.redirect("/dashboard");
       }
 
       else {
