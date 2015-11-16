@@ -1,21 +1,15 @@
 var express = require('express');
-var exphbs = require('express-handlebars');
 var url = require('url');
+var app = express();
 var http = require('http');
+var exphbs = require('express-handlebars');
+var instagram = require('instagram-node').instagram();
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
-var instagram = require('instagram-node').instagram();
-
-// Global Variables //
-var app = express();
 
 var cid = 'f81f407862d44b03a130dfb1c020c5ff'
 var clsec = 'd337b5c6f52f4b3a8270d83c2d88ef18'
 
-var redirect_uri = 'http://localhost:8080/handleauth';
-var homepage_uri = 'http://localhost:8080/dashboard';
-
-// Element Initializations //
 app.engine('handlebars', exphbs({defaultLayout: 'base'}));
 app.set('view engine', 'handlebars');
 
@@ -39,19 +33,16 @@ instagram.use({
   client_secret: clsec
 });
 
-// Authentication Handling //
 var redirect_uri = 'http://localhost:8080/handleauth';
 var homepage_uri = 'http://localhost:8080/dashboard';
-var igResults = {};
 
 //Handles Authentication //
 exports.handleauth = function(req, res) {
   instagram.authorize_user(req.query.code, redirect_uri, function(err, result) {
     if (err) {
       console.log(err.body);
-      res.send("It looks like the credentials weren't valid.");
+      res.redirect("/");
     }
-
     else {
       instagram.use({access_token: result.access_token});
       req.session.instaToken = result.access_token;
@@ -59,7 +50,7 @@ exports.handleauth = function(req, res) {
       req.session.username = result.user.username;
       req.session.full_name = result.user.full_name;
       req.session.profile_picture = result.user.profile_picture;
-      req.session.save();
+      req.session.save()
       console.log(req.session.previous_page);
 
       if(req.session.previous_page == undefined){
@@ -74,9 +65,10 @@ exports.handleauth = function(req, res) {
       }
     }
   });
+
 };
 
-// Page Display Functions //
+// Page display functions //
 function welcome(req, res) {
   if (req.session.instaToken) {
     res.redirect("/dashboard");
@@ -93,7 +85,7 @@ function dashboard(req, res) {
       res.render('dashboard', {
         layout:'base',
         gram: medias,
-        title: req.session.username
+      title: req.session.username
       })
     })
   }
@@ -108,11 +100,7 @@ function dashboard(req, res) {
 function profile(req, res) {
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-        res.render('profile', {
-          layout: 'profileLayout',
-          title: req.session.username,
-          profile_picture: req.session.profile_picture,
-         });
+        res.render('profile', {profile_picture: req.session.profile_picture });//Add your function here
     });
   }
 
@@ -124,38 +112,22 @@ function profile(req, res) {
 };
 
 function search(req, res) {
-  if(req.session.instaToken)
-  {
-    if (req.params.tags)
-    {
-      instagram.tag_media_recent(req.params.tags, function(err, medias, pagination, remaining, limit) {
-      res.render('search',
-          {
-            layout: 'base',
-            gram: medias,
-            title: req.session.username
-          })
+  if(req.session.instaToken) {
+    instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
+      res.render('search', {
+        layout:'base',
+        searchResults: medias,
+        gram: medias,
+        title: req.session.username
       })
-    }
-    else
-    {
-      instagram.media_popular(function(err, medias, remaining, limit) {
-      res.render('search',
-          {
-            layout: 'base',
-            gram: medias,
-            title: req.session.username
-          })
-      })
-    }
-
+    })
   }
 
-  else
-  {
+  else {
     req.session.previous_page = '/search';
     req.session.save();
     res.redirect('/');
+
   }
 };
 
@@ -165,9 +137,8 @@ function redirAPI(req, res) {
     client_id: cid,
     client_secret: clsec
   });
-
   res.redirect(instagram.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
-};
+}
 
 function logout(req, res) {
   req.session.destroy(function(err) {/* cannot access session here */})
@@ -175,14 +146,11 @@ function logout(req, res) {
 };
 
 // Page Routes //
-//All Routes here.
 app.get('/', welcome);
 app.get('/redirect', redirAPI);
 app.get('/dashboard', dashboard);
 app.get('/profile', profile);
 app.get('/search', search);
-app.get('/search%', search);
-app.get('/search%:tags', search);
 app.get('/logout', logout);
 app.get('/handleauth', exports.handleauth);
 
@@ -191,7 +159,7 @@ app.use(function(req, res, next) {
   res.redirect("/");
 });
 
-// Server Handling //
+// Server Execution //
 app.listen(8080, function(err) {
   if(err) {
     console.log("Error");
@@ -201,4 +169,3 @@ app.listen(8080, function(err) {
     console.log("Listening on port 8080");
   }
 });
-
