@@ -104,7 +104,11 @@ function dashboard(req, res) {
 function profile(req, res) {
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-        res.render('profile', {profile_picture: req.session.profile_picture });//Add your function here
+        res.render('profile', {
+          layout: 'profileLayout',
+          title: req.session.username,
+          profile_picture: req.session.profile_picture,
+         });
     });
   }
 

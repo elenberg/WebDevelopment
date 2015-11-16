@@ -1,0 +1,32 @@
+<head>
+  <link rel="stylesheet" href="../resources/css/profileStyles.css">
+  <link rel="stylesheet" href="../resources/css/welcomeStyles.css">
+</head>
+<!--Beginning of the body div-->
+  <body>
+    <!--Beginning of entire div wrapper for the page-->
+    <div class="mb-wrapper">
+      <!--Beginning of div for profile picture-->
+      <center>
+        <div id= "profilepicture">
+          <img class="picture" src={{profile_picture}} alt="A beautiful profile picture"/>
+            <p><b>{{title}}</b></p>
+
+        </div>
+        <!--Beginning of div for the profile form-->
+        <div class="form">
+          <form method="post" action="my_profile.html">
+            <div><input type="text" placeholder="Name" class="textBox"/><br></div> <!-- Mandi: Use my class "textBox" on your text boxes for site continuity. Or we could pick a different style of text box-->
+            <div><input type="text" placeholder="Email Address" class="textBox"/><br></div>
+            <div><input type="text" placeholder="Biography" id="BioBox" class="textBox"/><br></div>
+            <div id="SaveDiv"><input type="submit" value="Save" class="button orange" id="SaveButton"/><br></div> <!--Added classes for onsistent button style and position-->
+            </form>
+          </div>
+        <!--Ending of div for the profile form-->
+      </center>
+      <!--End of centered section-->
+    </div>
+    <!--ending div for wrapper-->
+  </body>
+  <!--End of the body div-->
+</html>
