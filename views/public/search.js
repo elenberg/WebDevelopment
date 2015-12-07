@@ -4,8 +4,6 @@ $(document).ready(function(){
   var currentFilter = "";
   var address = window.location.href;
 
-  $('.savedSearches').hide();
-
   if (address.indexOf('%') != -1)
   {
     currentFilter = address.substring(address.indexOf('%') + 1, address.length);
@@ -86,7 +84,11 @@ $(document).ready(function(){
 
   function removeSearch(searchTerm)
   {
-
+    var removeTermUrl = "http://localhost:8080/removeSearch%" + searchTerm;
+    $.ajax({
+        type: 'POST',
+        url: removeTermUrl
+    });
   };
 
   function saveSearch(searchTerm)
@@ -96,6 +98,8 @@ $(document).ready(function(){
         type: 'POST',
         url: saveTermUrl
     });
+
+    setTimeout.delay(runSearch(searchTerm), 1000);
   };
 
   function runSearch(searchTerm)

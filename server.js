@@ -84,7 +84,7 @@ function getUserProfile(session){
     if (session.username)
     {
       var userExists = false;
-      var cursor = db.collection("ig_users").find({"username":"testUser"}); //session.username});
+      var cursor = db.collection("ig_users").find({"username":session.username});
       cursor.each(function(err, doc)
       {
         if (doc)
@@ -114,8 +114,6 @@ function getUserProfile(session){
     }
   });
 };
-
-
 
 // Page Display Functions //
 function welcome(req, res) {
@@ -167,6 +165,7 @@ function profile(req, res) {
 };
 
 function search(req, res) {
+  setTimeout(function(){
   if(req.session.instaToken)
   {
     console.log(req.session.dbInfo);
@@ -179,8 +178,8 @@ function search(req, res) {
             savedSearches: req.session.dbInfo.searches,
             gram: medias,
             title: req.session.username
-          })
-      })
+          });
+      });
     }
     else
     {
@@ -191,10 +190,9 @@ function search(req, res) {
             savedSearches: req.session.dbInfo.searches,
             gram: medias,
             title: req.session.username
-          })
-      })
+          });
+      });
     }
-
   }
 
   else
@@ -203,14 +201,61 @@ function search(req, res) {
     req.session.save();
     res.redirect('/');
   }
+}, 1000);
 };
 
 function saveSearchTerm(req, res) {
-    console.log(req.params.term);
+  console.log(req.params.term);
+  MongoClient.connect(mongo_uri, function(err, db) {
+    if (req.session.username)
+    {
+      var cursor = db.collection("ig_users").find({"username":req.session.username}); //session.username});
+      cursor.each(function(err, doc)
+      {
+        if (doc)
+        {
+          var index = doc.searches.indexOf(req.params.term);
+          if (index == -1) {
+            doc.searches.push(req.params.term);
+            db.collection("ig_users").update({"username":req.session.username},
+              {$set: {searches:doc.searches}});
+            req.session.dbInfo = JSON.parse(JSON.stringify(doc));
+            req.session.save();
+          }
+        }
+
+        db.close();
+      });
+    }
+  });
+
 };
 
 function removeSearchTerm(req, res) {
-    console.log(req.params.term);
+  console.log(req.params.term);
+  MongoClient.connect(mongo_uri, function(err, db) {
+    if (req.session.username)
+    {
+      var cursor = db.collection("ig_users").find({"username":req.session.username}); //session.username});
+      cursor.each(function(err, doc)
+      {
+        if (doc)
+        {
+          var index = doc.searches.indexOf(req.params.term);
+          if (index > -1) {
+            doc.searches.splice(index, 1);
+            db.collection("ig_users").update({"username":req.session.username},
+              {$set: {searches:doc.searches}});
+            req.session.dbInfo = JSON.parse(JSON.stringify(doc));
+            req.session.save();
+          }
+        }
+
+        db.close();
+      });
+    }
+  });
+
 };
 
 // Page action functions //
