@@ -357,22 +357,18 @@ body{
   margin-left: 10px;
   margin-bottom: 5px;
   float: left;
-  margin: 10px 0 10px 10px;
+  margin: 10px 5px 10px 10px;
 }
 
 .currentSearches button {
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
   background: #FFF;
   border: solid 1px #CCC;
   height: 35px;
   text-align: center;
   width: 100px;
   margin: 10px 0 10px 0px;
-}
-
-.currentSearches button:hover {
-  border: solid 2px #DDD;
-  background-color: #DDD;
+  float: left;
   -webkit-transition: border 500ms;
   -moz-transition: border 500ms;
   -o-transition: border 500ms;
@@ -381,6 +377,35 @@ body{
   -moz-transition: background-color 500ms;
   -o-transition: background-color 500ms;
   transition: background-color 500ms;
+}
+
+.currentSearches button:hover {
+  border: solid 2px #DDD;
+  background-color: #DDD;
+}
+
+.currentSearches img {
+  border-radius: 0 5px 5px 0;
+  background: #FFF;
+  border: solid 1px #CCC;
+  height: 33px;
+  width: 33px;
+  margin: 10px 0 10px 0px;
+  opacity:1;
+  -webkit-transition: border 500ms;
+  -moz-transition: border 500ms;
+  -o-transition: border 500ms;
+  transition: border 500ms;
+  -webkit-transition: opacity 500ms;
+  -moz-transition: opacity 500ms;
+  -o-transition: opacity 500ms;
+  transition: opacity 500ms;
+}
+
+.currentSearches img:hover {
+  border: solid 1px #DDD;
+  background-color: #DDD;
+  opacity:.4;
 }
 
 /*------------------------------------*\
@@ -396,11 +421,6 @@ body{
   width: 180px;
   float: left;
   margin: 10px 550px 10px 10px;
-}
-
-.toggleSavedSearches button:hover {
-  border: solid 2px #DDD;
-  background-color: #DDD;
   -webkit-transition: border 500ms;
   -moz-transition: border 500ms;
   -o-transition: border 500ms;
@@ -410,6 +430,11 @@ body{
   -o-transition: background-color 500ms;
   transition: background-color 500ms;
   margin: 10px 550px 10px 10px;
+}
+
+.toggleSavedSearches button:hover {
+  border: solid 2px #DDD;
+  background-color: #DDD;
 }
 
 .savedSearches {
@@ -431,21 +456,20 @@ body{
       float: left;
       padding: 4px;
       margin: 5px 5px 15px 0;
-    }
-
-  .savedSearches a:hover {
-      border: solid 2px #DDD;
-      -webkit-transition: border 500ms;
-      -moz-transition: border 500ms;
-      -o-transition: border 500ms;
-      transition: border 500ms;
-      background-color: #DDD;
+      text-align: center;
       -webkit-transition: background-color 500ms;
       -moz-transition: background-color 500ms;
       -o-transition: background-color 500ms;
       transition: background-color 500ms;
-      margin: 5px 5px 15px 0;
-      float: left;
+      -webkit-transition: border 500ms;
+      -moz-transition: border 500ms;
+      -o-transition: border 500ms;
+      transition: border 500ms;
+    }
+
+  .savedSearches a:hover {
+      border: solid 2px #DDD;
+      background-color: #DDD;
   }
 
   .savedSearches button {
@@ -460,11 +484,6 @@ body{
       vertical-align:middle;
       margin: 5px 0 15px 5px;
       float: left;
-  }
-
-  .savedSearches button:hover {
-      border: solid 2px #DDD;
-      background-color: #DDD;
       -webkit-transition: border 500ms;
       -moz-transition: border 500ms;
       -o-transition: border 500ms;
@@ -473,6 +492,9 @@ body{
       -moz-transition: background-color 500ms;
       -o-transition: background-color 500ms;
       transition: background-color 500ms;
-      margin: 5px 0 15px 5px;
-      float: left;
+  }
+
+  .savedSearches button:hover {
+      border: solid 2px #DDD;
+      background-color: #DDD;
   }
