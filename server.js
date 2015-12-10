@@ -60,7 +60,6 @@ exports.handleauth = function(req, res) {
       req.session.username = result.user.username;
       req.session.full_name = result.user.full_name;
       req.session.profile_picture = result.user.profile_picture;
-      req.session.dbInfo = {};
       req.session.save();
 
       getUserProfile(req.session);
@@ -81,31 +80,21 @@ exports.handleauth = function(req, res) {
 
 function getUserProfile(session){
   MongoClient.connect(mongo_uri, function(err, db) {
-    if (session.username)
-    {
-      var userExists = false;
-      var cursor = db.collection("ig_users").find({"username":session.username});
-      cursor.each(function(err, doc)
-      {
-        if (doc)
-        {
-          console.log("Found user " + doc.username);
-          userExists = true;
-          session.dbInfo = JSON.parse(JSON.stringify(doc));
-          session.save();
-        }
+    if (err) {
+      alert("Error while fetching user profile");
+    }
 
-        if (!userExists)
-        {
+    if (session.username) {
+      var cursor = db.collection("ig_users").find({"username":session.username});
+      cursor.each(function(err, doc) {
+        if (!doc) {
           console.log("Adding " + session.username + " to MongoDB");
-          var defaultUser =
-          {
+          var defaultUser = {
               "username" : session.username,
               "name" : session.full_name,
               "email" : "",
               "bio" : "",
-              "searches" : []
-          };
+              "searches" : [] };
           db.collection('ig_users').insertOne(defaultUser, function(err, result){});
         }
 
@@ -149,11 +138,11 @@ function profile(req, res) {
   var userProfile = getUserProfile(req.session);
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
-        res.render('profile', {
-          layout: 'profileLayout',
-          title: req.session.username,
-          profile_picture: req.session.profile_picture,
-         });
+      res.render('profile', {
+        layout: 'profileLayout',
+        title: req.session.username,
+        profile_picture: req.session.profile_picture,
+       });
     });
   }
 
@@ -165,32 +154,27 @@ function profile(req, res) {
 };
 
 function search(req, res) {
-  setTimeout(function(){
   if(req.session.instaToken)
   {
     console.log(req.session.dbInfo);
     if (req.params.tags)
     {
       instagram.tag_media_recent(req.params.tags, function(err, medias, pagination, remaining, limit) {
-      res.render('search',
-          {
-            layout: 'base',
-            savedSearches: req.session.dbInfo.searches,
-            gram: medias,
-            title: req.session.username
-          });
+        res.render('search', {
+              layout: 'base',
+              gram: medias,
+              title: req.session.username
+        });
       });
     }
     else
     {
       instagram.media_popular(function(err, medias, remaining, limit) {
-      res.render('search',
-          {
-            layout: 'base',
-            savedSearches: req.session.dbInfo.searches,
-            gram: medias,
-            title: req.session.username
-          });
+        res.render('search', {
+              layout: 'base',
+              gram: medias,
+              title: req.session.username
+        });
       });
     }
   }
@@ -201,53 +185,45 @@ function search(req, res) {
     req.session.save();
     res.redirect('/');
   }
-}, 1000);
 };
 
-function saveSearchTerm(req, res) {
-  console.log(req.params.term);
+function updateSearch(req, res){
   MongoClient.connect(mongo_uri, function(err, db) {
-    if (req.session.username)
-    {
+    if (req.session.username) {
       var cursor = db.collection("ig_users").find({"username":req.session.username}); //session.username});
       cursor.each(function(err, doc)
       {
-        if (doc)
-        {
-          var index = doc.searches.indexOf(req.params.term);
-          if (index == -1) {
-            doc.searches.push(req.params.term);
-            db.collection("ig_users").update({"username":req.session.username},
-              {$set: {searches:doc.searches}});
-            req.session.dbInfo = JSON.parse(JSON.stringify(doc));
-            req.session.save();
-          }
+        if (err) {
+          alert("Error in remove search term section");
+        }
+
+        if (doc) {
+          res.send(doc.searches);
         }
 
         db.close();
       });
     }
   });
-
 };
 
-function removeSearchTerm(req, res) {
-  console.log(req.params.term);
+function removeSearchTerm(req, res){
   MongoClient.connect(mongo_uri, function(err, db) {
-    if (req.session.username)
-    {
+    if (req.session.username) {
       var cursor = db.collection("ig_users").find({"username":req.session.username}); //session.username});
       cursor.each(function(err, doc)
       {
-        if (doc)
-        {
-          var index = doc.searches.indexOf(req.params.term);
+        if (err) {
+          alert("Error in remove search term section");
+        }
+
+        if (doc) {
+          var index = doc.searches.indexOf(req.query.search);
           if (index > -1) {
             doc.searches.splice(index, 1);
             db.collection("ig_users").update({"username":req.session.username},
               {$set: {searches:doc.searches}});
-            req.session.dbInfo = JSON.parse(JSON.stringify(doc));
-            req.session.save();
+            res.send(doc.searches);
           }
         }
 
@@ -255,7 +231,32 @@ function removeSearchTerm(req, res) {
       });
     }
   });
+};
 
+function saveSearchTerm(req, res){
+  MongoClient.connect(mongo_uri, function(err, db) {
+    if (req.session.username) {
+      var cursor = db.collection("ig_users").find({"username":req.session.username}); //session.username});
+      cursor.each(function(err, doc)
+      {
+        if (err) {
+          alert("Error in save search term section");
+        }
+
+        if (doc) {
+          var index = doc.searches.indexOf(req.query.search);
+          if (index == -1) {
+            doc.searches.push(req.query.search);
+            db.collection("ig_users").update({"username":req.session.username},
+              {$set: {searches:doc.searches}});
+            res.send(doc.searches);
+          }
+        }
+
+        db.close();
+      });
+    }
+  });
 };
 
 // Page action functions //
@@ -286,8 +287,9 @@ app.get('/search%', search);
 app.get('/search%:tags', search);
 app.get('/logout', logout);
 app.get('/handleauth', exports.handleauth);
-app.post('/saveSearch%:term', saveSearchTerm);
-app.post('/removeSearch%:term', removeSearchTerm);
+app.get('/saveSearch', saveSearchTerm);
+app.get('/removeSearch', removeSearchTerm);
+app.get('/updateSearch', updateSearch);
 
 // Invalid URL Handling //
 app.use(function(req, res, next) {

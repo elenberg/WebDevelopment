@@ -335,11 +335,20 @@ body{
 /*------------------------------------*\
             Search Display
 \*------------------------------------*/
-.search {
+.search-container {
+  width: 100%;
   position: relative;
-  width: 70%;
-  left: 25%;
-  float: left;
+  float:left;
+}
+
+.search {
+  width: 1000px;
+  center:100%;
+  top:0px;
+  left:0;
+  right:0;
+  margin:auto;
+  position:relative;
 }
 
 .searchLabels {
@@ -419,7 +428,6 @@ body{
   height: 35px;
   text-align: center;
   width: 180px;
-  float: left;
   margin: 10px 550px 10px 10px;
   -webkit-transition: border 500ms;
   -moz-transition: border 500ms;
@@ -438,14 +446,19 @@ body{
 }
 
 .savedSearches {
-  width: 50%;
-  margin: 15px 0 15px 0;
+  width: 100%;
+  margin: 5px 0 5px 0;
 }
 
-  .savedSearches ul li {
+  .savedSearches #pair {
+    float: left;
+  }
+
+  .savedSearches ul {
     float: left;
     margin: 10px;
-    margin: 15px 0 15px 0;
+    margin: 5px 0 5px 0;
+    position: relative;
   }
 
     .savedSearches a {
@@ -483,7 +496,6 @@ body{
       text-align: center;
       vertical-align:middle;
       margin: 5px 0 15px 5px;
-      float: left;
       -webkit-transition: border 500ms;
       -moz-transition: border 500ms;
       -o-transition: border 500ms;

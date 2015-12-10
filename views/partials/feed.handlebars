@@ -3,18 +3,20 @@
   {{#each gram}}
     <div class="box">
         <div class="front"><a href="{{this.link}}" target= "_blank">
-           <img src="{{this.images.standard_resolution.url}}" class= "img-responsive">
-        </a>
-      </div>
+           <img src="{{this.images.standard_resolution.url}}" class= "img-responsive" />
+
+        </div>
+
       <div class="back">
-        <span class="backText">{{this.caption.text}}</br></span>
+        <span class="backText">{{this.caption.text}}<br/></span>
         <button class="pull--left"> {{ this.comments.count }} comments</button>
         <button class="pull--right">{{this.likes.count}} likes</button>
         <a href="{{this.link}}" target= "_blank">
-        <img src="{{this.images.standard_resolution.url}}" class= "img-responsive">
+          <img src="{{this.images.standard_resolution.url}}" class= "img-responsive" />
         </a>
-     </a>
+
       </div>
+
     </div>
-    {{/each}}
+  {{/each}}
 </div>

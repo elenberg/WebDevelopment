@@ -1,5 +1,3 @@
-
-
 $(document).ready(function(){
   var currentFilter = "";
   var address = window.location.href;
@@ -10,10 +8,9 @@ $(document).ready(function(){
     $('.searchInput').val(currentFilter);
   }
 
-  $('.toggleSavedSearches').click(function(e){
-    e.preventDefault();
-    e.stopPropagation();
+  updateSearches();
 
+  $('.toggleSavedSearches').click(function(e){
     if ($(this).hasClass('visible'))
     {
       $(this).removeClass('visible');
@@ -28,9 +25,6 @@ $(document).ready(function(){
 
   // Modify search function
   $('.searchSubmit').click(function(e){
-    e.preventDefault();
-    e.stopPropagation();
-
     var currentFilter = $('.searchInput').val();
 
     if (currentFilter.indexOf('#') != -1)
@@ -50,25 +44,16 @@ $(document).ready(function(){
     }
   });
 
-  $('.removeSearch').click(function(e){
-    e.preventDefault();
-    e.stopPropagation();
-
+$(document).on('click', '.removeSearch', function(e){
     removeSearch(e.target.id);
   });
 
-  $('.applySearch').click(function(e){
-    e.preventDefault();
-    e.stopPropagation();
-
+$(document).on('click', '.applySearch', function(e){
     runSearch(e.target.id);
   });
 
   // Modify search function
-  $('.searchSave').click(function(e){
-    e.preventDefault();
-    e.stopPropagation();
-
+$(document).on('click', '.searchSave', function(e){
     var currentFilter = $('.searchInput').val();
 
     if (currentFilter.indexOf('#') != -1)
@@ -79,28 +64,54 @@ $(document).ready(function(){
     {
       $('.searchInput').removeClass('error');
       saveSearch(currentFilter);
+      runSearch(currentFilter);
     }
   });
 
+
+  function parseSearchTerms(data)
+  {
+    var firstTags = "<div id='pair'><button class='removeSearch' id='";
+    var secondTags = "''> X</button><a class='applySearch' id='";
+    var thirdTags = "'>";
+    var finalTags = "</a></div>";
+    var allHtml = "<ul>";
+
+    for (i = 0; i < data.length; i++)
+    {
+      allHtml += firstTags + data[i] + secondTags + data[i] +
+      thirdTags + data[i] + finalTags;
+    }
+
+    allHtml += "</ul>";
+    return allHtml;
+  }
+
   function removeSearch(searchTerm)
   {
-    var removeTermUrl = "http://localhost:8080/removeSearch%" + searchTerm;
-    $.ajax({
-        type: 'POST',
-        url: removeTermUrl
+    var parameters = { search: searchTerm };
+    $.get( '/removeSearch', parameters, function(data) {
+      var htmlTerms = parseSearchTerms(data);
+      $('.savedSearches').html(htmlTerms);
     });
   };
 
   function saveSearch(searchTerm)
   {
-    var saveTermUrl = "http://localhost:8080/saveSearch%" + searchTerm;
-    $.ajax({
-        type: 'POST',
-        url: saveTermUrl
+    var parameters = { search: searchTerm };
+    $.get( '/saveSearch', parameters, function(data) {
+      var htmlTerms = parseSearchTerms(data);
+      $('.savedSearches').html(htmlTerms);
     });
-
-    setTimeout.delay(runSearch(searchTerm), 1000);
   };
+
+  function updateSearches()
+  {
+    $.get( '/updateSearch', {}, function(data) {
+      var htmlTerms = parseSearchTerms(data);
+      $('.savedSearches').html(htmlTerms);
+    });
+  }
 
   function runSearch(searchTerm)
   {
