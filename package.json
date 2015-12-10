@@ -15,7 +15,8 @@
     "handlebars": "^4.0.4",
     "instagram-node": "^0.5.8",
     "nodemon": "~1.7.1",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "mongodb": "^2.0.49"
   },
   "devDependencies": {},
   "scripts": {
