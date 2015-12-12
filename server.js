@@ -6,6 +6,7 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var instagram = require('instagram-node').instagram();
 var MongoClient = require('mongodb').MongoClient
+var formidable = require('formidable')
 
 // Global Variables //
 var app = express();
@@ -59,6 +60,7 @@ exports.handleauth = function(req, res) {
       req.session.user_id = result.user.id;
       req.session.username = result.user.username;
       req.session.full_name = result.user.full_name;
+      console.log("Full Name: " + req.session.full_name);
       req.session.profile_picture = result.user.profile_picture;
       req.session.save();
 
@@ -85,9 +87,14 @@ function getUserProfile(session){
     }
 
     if (session.username) {
+      var userFound = false;
       var cursor = db.collection("ig_users").find({"username":session.username});
       cursor.each(function(err, doc) {
-        if (!doc) {
+        if (doc)
+        {
+          userFound = true;
+        }
+        if (!doc && !userFound) {
           console.log("Adding " + session.username + " to MongoDB");
           var defaultUser = {
               "username" : session.username,
@@ -135,13 +142,13 @@ function dashboard(req, res) {
 };
 
 function profile(req, res) {
-  var userProfile = getUserProfile(req.session);
   if(req.session.instaToken) {
     instagram.user_media_recent(req.session.user_id, function(err, medias, pagination, remaining, limit) {
       res.render('profile', {
         layout: 'profileLayout',
         title: req.session.username,
         profile_picture: req.session.profile_picture,
+        full_name: req.session.full_name
        });
     });
   }
@@ -152,6 +159,52 @@ function profile(req, res) {
     res.redirect('/');
   }
 };
+
+function updateProfile(req, res){
+  MongoClient.connect(mongo_uri, function(err, db) {
+    if (req.session.username) {
+      var cursor = db.collection("ig_users").find({"username":req.session.username}); //session.username});
+      cursor.each(function(err, doc)
+      {
+        if (err) {
+          alert("Error in save search term section");
+        }
+
+        if (doc) {
+            db.collection("ig_users").update({"username":req.session.username},
+              {$set: {name:req.query.name,
+              email:req.query.email,
+              bio:req.query.bio}});
+
+        }
+
+        db.close();
+      });
+    }
+  });
+  }
+
+
+  function fetchProfile(req, res){
+    MongoClient.connect(mongo_uri, function(err, db) {
+      if (req.session.username) {
+        var cursor = db.collection("ig_users").find({"username":req.session.username});
+        cursor.each(function(err, doc)
+        {
+          if (err) {
+            alert("Error in save search term section");
+          }
+
+          if (doc) {
+              res.send(doc);
+              console.log(doc);
+          }
+
+          db.close();
+        });
+      }
+    });
+    }
 
 function search(req, res) {
   if(req.session.instaToken)
@@ -290,6 +343,8 @@ app.get('/handleauth', exports.handleauth);
 app.get('/saveSearch', saveSearchTerm);
 app.get('/removeSearch', removeSearchTerm);
 app.get('/updateSearch', updateSearch);
+app.get('/updateProfile', updateProfile);
+app.get('/fetchProfile', fetchProfile);
 
 // Invalid URL Handling //
 app.use(function(req, res, next) {
