@@ -1,6 +1,7 @@
 $(document).ready(function(){
     fetchProfile();
   $('.submitProfile').click(function(e) {
+    e.preventDefault();
     var profileParameters = {
       name: $('.nameTextBox').val(),
       email: $('.emailTextBox').val(),
@@ -8,9 +9,10 @@ $(document).ready(function(){
     };
     console.log('Submit Profile');
         $.get( '/updateProfile', profileParameters, function(data) {});
+        alert('Profile Saved Succesfully!');
   });
   function fetchProfile(){
-    $.get( '/updateProfile', {}, function(data) {
+    $.get( '/fetchProfile', {}, function(data) {
       $('.nameTextBox').val(data.name),
       $('.bioTextBox').val(data.bio),
       $('.emailTextBox').val(data.email)

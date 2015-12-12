@@ -6,7 +6,6 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var instagram = require('instagram-node').instagram();
 var MongoClient = require('mongodb').MongoClient
-var formidable = require('formidable')
 
 // Global Variables //
 var app = express();
